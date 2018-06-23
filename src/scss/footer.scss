@@ -1,0 +1,24 @@
+.footer {
+  @extend .horizontal,.middle,.spaddingt,.spaddingb,.paddingl,.paddingr;
+  border-top: 1px solid $secondary;
+  .logo {display: none;}
+  .contact-us-link {
+    @extend .marginr;
+    cursor: pointer;
+    &:hover {
+      color: $special;
+    }
+  }
+  .mailto-link {
+    cursor: pointer;
+    &:hover {
+      color: $special;
+    }
+  }
+  .copyright {
+    cursor: pointer;
+    &:hover {
+      color: $special;
+    }
+  }
+}

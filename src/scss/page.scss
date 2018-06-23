@@ -1,0 +1,36 @@
+.page {
+  @extend .vertical,.fitH;
+  padding: 0;margin: 0 auto;
+  background-color: $primary;
+  .content {
+
+  }
+  .main {
+    @extend .flex1,.paddingl,.paddingr;
+    background-color: $bg-content;
+  }
+  .not-logged {
+    @extend .horizontal,.center,.middle,.flex1;
+    .introduction {
+      @extend .vertical,.flex1,.superpadding;
+    }
+    .signin-signup {
+    }
+  }
+}
+.page.not-logged .content {
+  .main {
+    padding-left: $mapa;
+  }
+}
+.page-home {
+
+}
+.page-verification {
+  .form.inline>* {
+    margin: 0 0 12px;
+  }
+}
+.page-password {
+
+}

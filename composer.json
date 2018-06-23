@@ -1,0 +1,20 @@
+{
+    "name": "phitien/szo.backend",
+    "type": "project",
+    "require": {
+        "zendframework/zend-servicemanager": "^3.3",
+        "zendframework/zend-mail": "^2.10",
+        "swiftmailer/swiftmailer": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zend\\Mail\\": "src/"
+        }
+    },    
+    "authors": [
+        {
+            "name": "Phi Tien",
+            "email": "im.phitien@gmail.com"
+        }
+    ]
+}

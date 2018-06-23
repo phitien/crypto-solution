@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+
+<title>{apptitle}</title>
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+{meta}
+
+<link rel="shortcut icon" type="image/png" href="{favicon32}" sizes="32x32"/>
+<link rel="shortcut icon" type="image/png" href="{favicon192}" sizes="192x192"/>
+
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+
+<!-- inject:css -->
+<!-- endinject -->
+
+</head>
+<body>
+<noscript>Your browser does not support JavaScript!</noscript>
+<div id="application" class="container-fluid application"></div>
+
+<!-- inject:js -->
+<!-- endinject -->
+
+<!-- Facebook -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0&appId=497063317337038&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- AddThis -->
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<!-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b23bdafc9ec70b7"></script> -->
+
+</body>
+</html>

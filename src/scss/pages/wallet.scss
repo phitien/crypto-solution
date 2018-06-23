@@ -1,0 +1,40 @@
+.page-wallet {
+  .wallet-items {}
+  .wallet-item {
+    display: inline-block;
+    padding: 12px;
+    box-shadow: 1px 3px 8px $blue;
+    cursor: pointer;
+    &:hover {
+      box-shadow: 1px 3px 8px $secondary;
+    }
+  }
+  .wallet-item-amount {
+    &:before {
+      content: attr(data-code);
+      margin-right: 4px;
+      opacity: .5;
+    }
+    &:after {
+      display: block;
+      content: attr(data-name);
+      margin-right: 4px;
+      font-size: 70%;
+      font-style: italic;
+      opacity: .5;
+    }
+  }
+  .wallet-item-usd {
+    margin-left: 4px;
+    &:before {
+      content: '~';
+      margin-right: 4px;
+      color: $secondary;
+    }
+    &:after {
+      content: 'USD';
+      opacity: .5;
+      margin-left: 4px;
+    }
+  }
+}

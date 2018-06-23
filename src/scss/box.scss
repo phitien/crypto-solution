@@ -1,0 +1,140 @@
+$positive-color: $blue;
+$negative-color: $yellow;
+.boxes {
+  margin: 0 auto;
+  display: flex;align-items: flex-start;justify-content: space-around;
+  .box {
+    margin: 24px 12px;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+.box {
+  background-color: white;
+  box-shadow: 2px 0px 8px rgba(0,0,0,.3);
+  border-radius: 4px;
+  padding: 12px 18px;
+  display: inline-block;
+  position: relative;
+  min-width: 280px;
+  min-height: 134px;
+  position: relative;
+  vertical-align: top;
+  .box-title {
+    font-size: 90%;
+    opacity: .5;
+    text-transform: uppercase;
+  }
+  .box-heading {
+    font-size: 200%;
+    font-weight: 600;
+    margin: 4px 0;
+  }
+  .box-content {
+
+  }
+  .coins {
+
+  }
+  .coin {
+    display: flex;
+    font-size: 70%;
+    opacity: .5;
+    .coin-name {
+      &:after {
+        content: ':';
+        margin-right: 6px;
+      }
+    }
+  }
+  .box-percentage-wrapper {
+    height: 5px;
+    width: 100%;
+    background-color: $grey;
+    margin-top: 21px;
+    position: absolute;left: 0;bottom: 0;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  .box-percentage-text {
+    position: absolute;
+    margin-left: -18px;
+    top: -24px;
+    color: $positive-color;
+    &:after {
+      content: '%';
+    }
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;right: -12px;bottom: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid $positive-color;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+    }
+  }
+  .box-percentage {
+    height: 5px;
+    background-color: $positive-color;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+  &.today-visit {
+    .today {
+      font-size: 70%;
+      font-weight: 600;
+      opacity: .5;
+    }
+    .live {
+      position: absolute;
+      right: 18px;
+      top: 12px;
+      text-align: right;
+      h3 {
+        font-size: 90%;
+        font-weight: 600;
+        color: $red;
+        position: relative;
+        display: block;
+        height: 28px;
+        &:after {
+          content: '.';
+          position: absolute;top: -10px;right: 0;
+          font-size: 24px;
+          height: 2px;width: 2px;line-height: 2px;
+        }
+      }
+      span {
+        font-size: 120%;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 6px;
+      }
+      label {
+        font-size: 70%;
+        opacity: .5;
+        display: block;
+      }
+    }
+  }
+  &:hover {
+    box-shadow: 1px 3px 8px $secondary;
+  }
+  &.negative .box-percentage {
+    background-color: $negative-color;
+  }
+  &.negative .box-percentage-text {
+    color: $negative-color;
+  }
+  &.negative .box-percentage-text:before {
+    border-top-color: $negative-color;
+    border-bottom-color: transparent;
+    bottom: -6px;
+  }
+}

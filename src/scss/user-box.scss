@@ -1,0 +1,46 @@
+.user-box {
+  @extend .horizontal,.center,.middle;
+  .actions {
+    @extend .horizontal,.center,.middle;
+    width: 100%;
+  }
+  .user-info {
+    @extend .horizontal,.center,.middle;
+    cursor: pointer;
+    padding: $mapa/6 $mapa/2;
+    border-radius: 10px;
+    background-color: $blue;
+    .name {color: $white;margin-right: $mapa/3;}
+    .avatar {
+      height: 32px;width: 32px;
+      border-radius: 50%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 32px;
+      background-color: $grey;
+    }
+    &:hover {
+      // background-color: $white;
+      // .name {color: $special;}
+    }
+  }
+  .status {
+    font-size: 80%;
+    font-style: italic;
+  }
+  .button.transparent {
+    color: $black;
+  }
+}
+.user-not-verified {
+  .user-box {
+    .user-info {
+      background-color: $blue;
+      .name {color: $white;}
+      &:hover {
+        // background-color: $white;
+        // .name {color: $special;}
+      }
+    }
+  }
+}

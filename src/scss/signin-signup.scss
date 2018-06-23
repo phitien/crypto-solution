@@ -1,0 +1,32 @@
+.signin-signup {
+  @extend .padding;
+  margin: 0 auto;
+  .heading {
+    text-align: center;
+    margin-bottom: $mapa;
+  }
+  .form {
+    background-color: $white;
+    color: $black;
+    border-radius: 4px;
+    width: 360px;
+    box-shadow: 1px 3px 8px $orange;
+    // min-height: 140px;
+  }
+  .switch {
+    text-align: center;
+    margin-top: $mapa;
+    span {
+      cursor: pointer;
+      color: $orange;
+      margin-left: 3px;
+      margin-right: 3px;
+    }
+  }
+  .step {
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
+}

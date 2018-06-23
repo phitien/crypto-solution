@@ -1,0 +1,21 @@
+.table {
+  table {
+    border: none;
+    width: 100%;
+    tr {
+      border: none;
+    }
+    td {
+      border: none;
+    }
+  }
+  thead {
+    color: $special;
+  }
+  tbody {
+    tr:nth-child(even) {}
+    tr:nth-child(odd) {
+      background-color: #254752;
+    }
+  }
+}

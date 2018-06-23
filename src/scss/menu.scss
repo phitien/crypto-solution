@@ -1,0 +1,24 @@
+.menu {
+  margin: 0;padding: 0;
+  .node {
+    cursor: pointer;
+  }
+  .name {
+    display: flex;align-items: center;
+    line-height: 24px;
+    .image {
+      display: flex;align-items: center;justify-content: center;
+      margin-right: 4px;
+    }
+    span {
+      display: flex;align-items: center;
+    }
+  }
+  &.top {
+    .name {
+      .image {
+        display: none;
+      }
+    }
+  }
+}

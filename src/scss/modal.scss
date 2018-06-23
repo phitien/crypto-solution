@@ -1,0 +1,38 @@
+.m-overlay {
+  display: flex;align-items: center;justify-content: center;
+  height: 100%;width: 100%;flex: 1;
+  position: fixed;top: 0;left: 0;bottom: 0;right: 0;
+  background-color: rgba(0,0,0,.8);
+  z-index: 1;
+  .m-container {
+    background-color: $white;
+    color: $black;
+    box-shadow: $shadow;
+    border-radius: 4px;
+    position: relative;
+    max-width: 50%;
+  }
+  .m-header {
+    padding: 4px 12px;
+    font-size: 18px;
+    border-bottom: 1px solid $bd-color;
+  }
+  .m-content {
+    padding: 12px 12px;
+  }
+  .m-footer {
+    padding: 4px 12px;
+  }
+  .m-close {
+    cursor: pointer;
+    position: absolute;top: 0;right: 0;
+    height: 36px;width: 36px;
+    display: flex;align-items: center;justify-content: center;
+    &:hover {
+      i {
+        background-color: rgba(0,0,0,.3);
+        border-radius: 50%;
+      }
+    }
+  }
+}

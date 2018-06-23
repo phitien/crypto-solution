@@ -1,0 +1,46 @@
+.page {
+  .left {
+    width: 20%;
+    margin-right: 0;
+    min-width: 180px;
+    background-color: $left-bg-color;
+    color: $left-color;
+    padding: 24px 0 12px;
+    position: relative;
+    border-top-right-radius: 12px;
+    // border-bottom-right-radius: 12px;
+    i {cursor: pointer;}
+    .collapsing-icon {
+      position: absolute;top: 0;right: 0;
+    }
+    .menu.menu0 {
+      display: block;margin: 0;padding: 0;
+      .node {
+        @extend .big,.thin;
+        margin: 0 0 1px;
+        padding: $mapa/2 $mapa $mapa/2 - 3px;
+        &.active,&:hover {
+          background-color: #16343e;
+          color: $special;
+          border-right: 1px solid $special;
+        }
+      }
+      .name {
+        .image {
+          // display: none;
+        }
+      }
+    }
+    &.collapsed {
+      min-width: auto;
+      width: auto;
+      .menu.menu0 {}
+      .menu .name span {display: none;}
+    }
+  }
+}
+.page.not-logged .content {
+  .left {
+    display: none;
+  }
+}

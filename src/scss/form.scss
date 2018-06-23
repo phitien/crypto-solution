@@ -1,0 +1,58 @@
+.form {
+  @extend .vertical,.center,.middle,.padding;
+  padding: 0;
+  display: block;margin: 0 auto;padding: 0;
+  outline: none;
+  .label {
+    margin-bottom: $mapa/3;
+  }
+  .input {
+    width: 100%;
+    margin: $mapa/2 0;
+    vertical-align: top;
+  }
+  &.inline {
+    position: relative;
+    .input {
+      @extend .horizontal;
+      margin: $mapa/2 0 $mapa;
+      .label {
+        width: 150px;
+        margin-right: $mapa;
+      }
+    }
+  }
+  &.half {
+    .fields-group {
+      margin: $mapa/2 6px $mapa;
+      width: calc(50% - 12px);
+      display: inline-block;
+    }
+    > .input {
+      margin: $mapa/2 6px $mapa;
+      width: calc(50% - 12px);
+      display: inline-block;
+    }
+    &.inline .input {
+      .label {width: 100px;}
+      display: inline-flex;
+      width: calc(50% - 12px);
+    }
+  }
+}
+.sign-in,.sign-up {
+  background-color: transparent;
+  // background-color: #71350d;
+  border-radius: 4px;
+  .form {
+    padding: $mapa/2 $mapa $mapa;
+  }
+}
+.fields-group {
+  &.horizontal {
+    .input {
+      margin-right: $mapa/2;
+      &:last-child {margin-right: 0;}
+    }
+  }
+}

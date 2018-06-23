@@ -1,0 +1,52 @@
+.steps {
+  .step-header {
+    @extend .horizontal,.center,.middle;
+    border-bottom: 1px solid $special;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+  .step-header-item {
+    @extend .vertical,.center,.middle,.paddingl,.paddingr;
+    position: relative;overflow: hidden;
+    &.active {
+      .step-header-item-index {
+        background-color: $special;
+        color: $white;
+        box-shadow: $shadow-hover;
+      }
+      .step-header-item-name {}
+    }
+    .step-header-item-line-before {
+      position: absolute;
+      height: 3px;
+      top: 15px;left: 0;width: 10px;
+      background-color: $white;
+    }
+    .step-header-item-line-after {
+      position: absolute;
+      height: 3px;
+      top: 15px;right: 0;width: 10px;
+      background-color: $white;
+    }
+    &:first-child .step-header-item-line-before {display: none;}
+    &:last-child .step-header-item-line-after {display: none;}
+  }
+  .step-header-item-index {
+    @extend .vertical,.center,.middle;
+    border-radius: 50%;
+    height: 32px;width: 32px;
+    background-color: $white;
+    color: $special;
+    box-shadow: $shadow;
+    cursor: pointer;
+  }
+  .step-header-item-name {
+    margin-top: $mapa/2;
+  }
+  .step {
+    display: none;
+    &.active {
+      display: initial;
+    }
+  }
+}

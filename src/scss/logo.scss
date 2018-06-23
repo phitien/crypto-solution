@@ -1,0 +1,16 @@
+.logo {
+  @extend .horizontal,.middle,.pointer,.giant,.thin;
+  color: $special;
+  background-image: url({baseurl}static/images/logo.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  text-shadow: 0px 1px 0px white;
+  background-size: contain;
+  height: $header-height;
+  width: 100px;
+  &.small {
+    // @extend .super;
+    // background-position: 6px 50%;
+    // background-size: 12px;
+  }
+}
