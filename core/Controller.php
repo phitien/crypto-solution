@@ -2,7 +2,12 @@
 class Controller {
   protected $_router;
   protected $_model;
-  public function __construct(Router $router) {$this->_router = $router;}
+  protected $_view;
+  public function __construct(Router $router, View $view) {
+    $this->_router = $router;
+    $this->_view = $view;
+  }
+  public final function assignToView($k, $v = null) {$this->_view->assign($k,$v);return $this;}
   public final function router() {return $this->_router;}
   public final function route() {return $this->router()->route();}
   public final function app() {return $this->router()->app();}

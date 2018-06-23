@@ -24,6 +24,9 @@ class Request {
   public final static function uid() {
     return self::get('uid');
   }
+  public final static function ajax() {
+    return self::get('ajax') ? true : false;
+  }
   public final static function method() {
     return strtolower($_SERVER['REQUEST_METHOD']);
   }

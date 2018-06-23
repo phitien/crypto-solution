@@ -1,0 +1,20 @@
+[
+  {"src": "/static/jquery/jquery-ui/external/jquery/jquery.js"},
+  {"src": "/static/jquery/jquery-ui/jquery-ui.min.js"},
+  {"src": "/static/bootstrap/js/tether.min.js"},
+  {"src": "/static/bootstrap/js/bootstrap.min.js"},
+  {"src": "/static/d3/d3.v4.min.js"},
+  {"src": "/static/d3/d3-selection-multi.v0.4.min.js"},
+  {"src": "/static/babel-core/browser.min.js"},
+  {"src": "/static/d3pie/d3pie.min.js"},
+  {"src": "/static/js/config.js"},
+  {"src": "/static/js/events.js"},
+  {"src": "/static/js/firebase.js"},
+  {"src": "/static/js/linechart.js"},
+  {"src": "/static/js/piechart.js"},
+  {"src": "/static/js/libs/vendor-0.js"},
+  {"src": "/static/js/libs/vendor-1.js"},
+  {"src": "/static/js/libs/vendor-2.js"},
+  {"src": "/static/js/app/index.js"},
+  "(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0&appId=497063317337038&autoLogAppEvents=1';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));"
+]

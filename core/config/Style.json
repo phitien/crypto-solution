@@ -1,0 +1,10 @@
+[
+  {"href": "/static/bootstrap/css/bootstrap.min.css"},
+  {"href": "/static/material/material-icons.css"},
+  {"href": "/static/font-awesome/css/font-awesome.min.css"},
+  {"href": "/static/jquery/jquery-ui/jquery-ui.min.css"},
+  {"href": "/static/jquery/jquery-ui/jquery-ui.structure.min.css"},
+  {"href": "/static/jquery/jquery-ui/jquery-ui.theme.min.css"},
+  {"href": "/static/react-table/react-table.css"},
+  {"href": "/static/css/app/index.css"}
+]

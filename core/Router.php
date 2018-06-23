@@ -7,6 +7,7 @@ class Router {
   protected $_authorization;
   protected $_controllerName;
   protected $_controller;
+  protected $_view;
   protected $_actionName;
   protected $_handler;
   protected $_public;
@@ -16,6 +17,11 @@ class Router {
     $this->_app = $app;
     $this->_set_mime_type();
     $this->_set_controller();
+    $this->_set_action();
+    $this->_set_route();
+    $this->_set_handler();
+    $this->_set_view();
+    $this->_check_controller();
     $this->_authentication = new Authentication($this);
     $this->_authentication->execute();
     $this->_authorization = new Authorization($this);
@@ -28,10 +34,6 @@ class Router {
   protected final function _set_controller() {
     if (empty(Request::get('controller'))) Request::set('controller', 'index');
     $this->_controllerName = ucfirst(Request::get('controller'));
-    $klass = "Controller_{$this->_controllerName}";
-    $this->_controller = new $klass($this);
-    Log::info("Controller:"."Controller_{$this->_controllerName}");
-    $this->_set_action();
   }
   protected final function _set_action() {
     if (empty(Request::get('action'))) Request::set('action', 'index');
@@ -39,7 +41,6 @@ class Router {
     $this->_actionName = Request::get('action');
     $this->_actionName = $uid ? "{$this->_actionName}/:uid" : $this->_actionName;
     Log::info("Action:".$this->action());
-    $this->_set_route();
   }
   protected final function _set_route() {
     $cname = lcfirst($this->_controllerName);
@@ -51,11 +52,10 @@ class Router {
     $this->_public = true;
     if (isset($route['public'])) $this->_public = $route['public'] ? true : false;
     Log::info("Route", $this->route());
-    $this->_set_handler();
   }
   protected final function _set_handler() {
     $aname = strpos($this->_actionName, "/:") ? explode("/", $this->_actionName)[0] : $this->_actionName;
-    $route = $this->_route;
+    $route = $this->route();
     $method = $route['method'];
     $rmethod = Request::method();
     Log::info("RequestMethod:".Request::method());
@@ -72,20 +72,30 @@ class Router {
       $handler = str_replace("*", "", $handler);
       $this->_public = false;
     }
-    if (!method_exists($this->_controller, $handler)) throw new Exception_NotFound(sprintf("Handler '%s' is missing in Controller '%s'", $handler, $this->_controllerName));
-    $reflection = new ReflectionMethod($this->_controller, $handler);
-    if (!$reflection->isPublic()) throw new Exception_NotFound(sprintf("Hanlder '%s' is not accessible in Controller '%s'", $handler, $this->_controllerName));
     $this->_handler = $handler;
-    if ($this->_mime_type != 'json') {
-      $this->_template = !empty($route['view']) ? $route['view'] : lcfirst($this->_controllerName)."/".lcfirst($handler);
-      Log::info("Template:".$this->template());
-    }
     Log::info("Handler:".$this->handler());
     Log::info("Public:".$this->isPublic());
     return $this;
   }
+  protected final function _set_view() {
+    $route = $this->route();
+    if ($this->mime_type() != 'json') {
+      $this->_template = !empty($route['view']) ? $route['view'] :
+        lcfirst($this->_controllerName)."/".lcfirst($this->handler());
+      Log::info("Template:".$this->template());
+    }
+    $this->_view = new View($this->template());
+  }
+  protected final function _check_controller() {
+    $klass = "Controller_{$this->_controllerName}";
+    $this->_controller = new $klass($this, $this->view());
+    Log::info("Controller:"."Controller_{$this->_controllerName}");
+    if (!method_exists($this->controller(), $this->handler()))
+      throw new Exception_NotFound(sprintf("Handler '%s' is missing in Controller '%s'", $handler, $this->_controllerName));
+  }
   public final function app() {return $this->_app;}
   public final function controller() {return $this->_controller;}
+  public final function view() {return $this->_view;}
   public final function action() {return $this->_actionName;}
   public final function isPublic() {return $this->_public;}
   public final function handler() {return $this->_handler;}
@@ -99,8 +109,7 @@ class Router {
   public final function response() {
     if ($this->mime_type() == 'json') return $this->controller()->{$this->handler()}();
     $this->controller()->{$this->handler()}();
-    $tpl = new Template;
-    return $tpl->render("{$this->template()}");
+    return $this->view()->render();
   }
   public final static function add($n, $v = null) {
     $actions = [

@@ -45,18 +45,14 @@ class Application {
     print_r(json_encode($res));
   }
   public function results($results = null, $status = 200) {
-    ob_end_clean();
-    ob_start();
+    // ob_end_clean();
+    // ob_start();
     $mime_type = Request::get('api') ? 'json' : $this->_mime_types[$this->_mime_type];
     if (!$mime_type) $mime_type = $this->_mime_types['html'];
     header("HTTP/1.1 $status ERROR");
     header("Content-Type: $mime_type");
     if (in_array($this->_mime_type, ['api', 'json'])) return $this->api_results($results);
     print_r($results);
-    if (DEBUG && !empty(Session::logs())) {
-      print_r(Session::logs());
-      Session::clean();
-    }
   }
   public function error($error, $status = 500) {$this->results(is_object($error) ? $error : ['error' => $error], $status);}
   public function pinfo($pinfo = null) {$this->_pinfo = $pinfo;return $this;}

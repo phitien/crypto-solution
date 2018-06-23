@@ -1,7 +1,8 @@
 <?php
-require_once SHARE_DIR.'/autoload.php';
+require_once CORE_DIR.'/autoload.php';
 
 if (!defined('APP_TYPE')) define('APP_TYPE', 'api');//value is api or web
+if (!defined('APP_COLOR')) define('APP_COLOR', '#4285f4');
 if (!defined('DEBUG')) define('DEBUG', !empty($_REQUEST['debug']));
 if (!defined('NODEBUG')) define('NODEBUG', true);
 if (!defined('HASH_ALGO')) define('HASH_ALGO', 'ripemd160');
@@ -16,7 +17,7 @@ if (!defined('MAILER')) define('MAILER', 'zend_mail');
 if (!defined('DOMAIN')) define('DOMAIN', $_SERVER['SERVER_NAME']);
 if (!defined('PROTOCOL')) define('PROTOCOL', ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443 || $_SERVER['HTTP_X_FORWARDED_PORT'] == 443) ? "https://" : "http://");
 if (!defined('EMAIL_VERIFICATION')) define('EMAIL_VERIFICATION', false);
-if (!defined('COUNTRY_PATH')) define('COUNTRY_PATH', SHARE_DIR.'/../src/static/static/data/countries.json');
+if (!defined('COUNTRY_PATH')) define('COUNTRY_PATH', CORE_DIR.'/../src/static/static/data/countries.json');
 
 function t() {
   $args = func_get_args();
@@ -24,4 +25,4 @@ function t() {
 }
 date_default_timezone_set(TIMEZONE);
 
-require_once SHARE_DIR.'/routes.php';
+require_once CORE_DIR.'/routes.php';

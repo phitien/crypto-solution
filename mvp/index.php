@@ -5,9 +5,9 @@ define('APP_NAME', 'SOZO - MVP');
 
 define('HASH_KEY', APP.'@123456');
 
-define('APP_DIR', $_SERVER['DOCUMENT_ROOT']);
-define('SHARE_DIR', APP_DIR.'/../core');
-define('VENDOR_DIR', APP_DIR.'/../vendor');
+define('APP_DIR', realpath($_SERVER['DOCUMENT_ROOT']));
+define('CORE_DIR', realpath(APP_DIR.'/../core'));
+define('VENDOR_DIR', realpath(APP_DIR.'/../vendor'));
 
 // define('NODEBUG', false);
 
@@ -31,7 +31,7 @@ define('EXTERNAL_PASSWORD_RESET',EXTERNAL_URL.'/password/reset');
 define('ONESIGNAL_APPID','ec589436-0771-461a-a7d9-4a9be77399d1');
 define('ONESIGNAL_APIKEY','MTYyNWZhNzAtODczNC00ZjQzLWE0Y2EtZWQ3YWYxNjQzNjAz');
 
-require_once SHARE_DIR.'/bootstrap.php';
+require_once CORE_DIR.'/bootstrap.php';
 require_once APP_DIR.'/routes.php';
 
 ini_set('display_errors', DEBUG);
