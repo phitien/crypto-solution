@@ -1,0 +1,11 @@
+{
+  "currency": "USD",
+  "sale": 3500,
+  "percentage": 65,
+  "positive": false,
+  "coins": {
+    "USI": 30000,
+    "BTC": 1.3045693320,
+    "ETH": 5.6666666667
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "twitter": "https://twitter.com/Conduitllc",
+  "linkedin": "https://www.linkedin.com/company/conduitcomputing/",
+  "facebook": "https://www.facebook.com/Conduit-Computing-932577496908656/",
+	"medium": "https://medium.com/conduitcomputing",
+	"github": "https://github.com/conduitllc",
+  "email_to": "mail://hello@conduitcomputing.com",
+  "telegram": "https://t.me/joinchat/CbuIf04K3P2tHf7Dz7LRMg",
+  "whitepaper": "https://s3.us-east-2.amazonaws.com/conduitcomputing/Conduit+Whitepaper+(Website+Version).pdf",
+  "pitch_deck": "https://s3.us-east-2.amazonaws.com/conduitcomputing/Conduit_PitchDeck_Website.pdf",
+  "private_sale": "https://goo.gl/forms/zrosRvD0jItOpRmh1",
+  "buytoken": "https://www.conduitcomputing.com/",
+  "login": "/login",
+  "register": "/register"
+}

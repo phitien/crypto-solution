@@ -1,0 +1,93 @@
+[
+  {
+    "id": "Ryan-Robinson",
+    "show": true,
+    "image": "assets/images/team/Ryan Robinson@3x.png",
+    "name": "Ryan Robinson",
+    "position": "CEO",
+    "intro": "MIT Information Theory and Quantum Computing. <b>DECA International Top 99%</b> Economics. Strategic Analytics Summit Advisory Board",
+    "articles": [],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/ryanrobinsonmit/",
+    "article0": "",
+    "article1": ""
+  },
+  {
+    "id": "Julia-Han",
+    "show": true,
+    "image": "assets/images/team/Julia Han@3x.png",
+    "name": "Julia Han",
+    "position": "CMO",
+    "intro": "<b>Wellesley graduate. </b> Marketing Assistant at Boston Consulting Group. Research Analyst at Edenbridge Health. Operations Assistant at Davis Museum.",
+    "articles": [],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/juliahanershan/",
+    "article0": "",
+    "article1": ""
+  },
+  {
+    "id": "Suki-Pabla",
+    "show": true,
+    "image": "assets/images/team/Suki Pabla@3x.png",
+    "name": "Suki Pabla",
+    "position": "Project Manager",
+    "intro": "Senior Business Analyst and Market Data Project Manager at <b>HSBC</b>. Senior Market Data Business Analyst at <b>Credit Suisse</b>.",
+    "articles": [],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/suki-pabla-452a42/",
+    "article0": "",
+    "article1": ""
+  },
+  {
+    "id": "David-Andrade",
+    "show": true,
+    "image": "assets/images/team/David Andrade@3x.png",
+    "name": "David Andrade",
+    "position": "Executive Associate",
+    "intro": "Security expert with extensive experience in security management with <b>AlliedBarton Security Services</b> and <b>MIT Security Services</b>.",
+    "articles": [],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/david-andrade-370b6326/",
+    "article0": "",
+    "article1": ""
+  },
+  {
+    "id": "Ebonique-Stepney",
+    "show": true,
+    "image": "assets/images/team/Ebonique Stepney@3x.png",
+    "name": "Ebonique Stepney",
+    "position": "Community Manager",
+    "intro": "Strong passion for various marketing strategies and specializes in community building, community management, and social media.",
+    "articles": [],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/ebonique-stepney-940b28155/",
+    "article0": "",
+    "article1": ""
+  },
+  {
+    "id": "Hung-Dang",
+    "show": true,
+    "image": "assets/images/team/Hung Dang@3x.png",
+    "name": "Hung Dang",
+    "position": "Head of Cloud Security",
+    "intro": "<b>PhD candidate</b> working in <b>Applied Cryptography</b>, Trusted Computing and <b>Privacy Enhancing Technologies</b>.",
+    "articles": [],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/hung-dang-61b69796/",
+    "article0": "",
+    "article1": ""
+  },
+  {
+    "id": "Scott-Heng",
+    "show": true,
+    "image": "assets/images/team/Scott Heng@3x.png",
+    "name": "Scott Heng",
+    "position": "Lead UI/UX Engineer",
+    "intro": "MIT graduate. UI Engineer at Sentient Technologies. Data Science intern at Takeda Pharmaceuticals. Research experience at MIT.",
+    "articles": [],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/scottheng/",
+    "article0": "",
+    "article1": ""
+  }
+]

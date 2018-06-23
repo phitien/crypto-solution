@@ -1,0 +1,14 @@
+[
+  {"code": "BTC","name": "Bitcoin","amount": 0.25634852,"usd": 2419.76},
+  {"code": "ETH","name": "Ethereum","amount": 10.99,"usd": 1990},
+  {"code": "XRP","name": "Ripple","amount": 1147.3,"usd": 147.3},
+  {"code": "ADA","name": "Cardano","amount": 247.3,"usd": 247.3},
+  {"code": "LTC","name": "Litecoin","amount": 11200.3,"usd": 11.9988},
+  {"code": "NEO","name": "Neo","amount": 876.000,"usd": 11.9988},
+  {"code": "EOS","name": "Eos","amount": 0.000083,"usd": 0.0008},
+  {"code": "BCH","name": "Bitcoin Cash","amount": 23247.3,"usd": 800000.3},
+  {"code": "DASH","name": "Dash","amount": 11200.3,"usd": 11.9988},
+  {"code": "XLM","name": "Stellar","amount": 7.000,"usd": 567.000},
+  {"code": "IOTA","name": "Iota","amount": 8.3,"usd": 0.0008},
+  {"code": "TRX","name": "Tron","amount": 654.3,"usd": 654}
+]

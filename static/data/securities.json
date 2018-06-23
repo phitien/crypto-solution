@@ -1,0 +1,13 @@
+{
+  "colums": [
+    {"name": "Device type","field": "deviceType"},
+    {"name": "Last used at","field": "time"},
+    {"name": "IP address","field": "ip"}
+  ],
+  "rows": [
+    {"deviceType": "Mac OS X","time": "28.04.2018 02:04:33", "ip": "42.112.126.211"},
+    {"deviceType": "Mac OS X","time": "28.04.2018 02:04:33", "ip": "42.112.126.211"},
+    {"deviceType": "Mac OS X","time": "28.04.2018 02:04:33", "ip": "42.112.126.211"},
+    {"deviceType": "Mac OS X","time": "28.04.2018 02:04:33", "ip": "42.112.126.211"}
+  ]
+}

@@ -1,0 +1,165 @@
+[
+  {
+    "id": "Scott-Aaronson",
+    "show": true,
+    "image": "assets/images/advisor/Scott Aaronson/main@3x.png",
+    "name": "Scott Aaronson",
+    "position": "Lead Advisor",
+    "intro": "Scott Aaronson is <b>Associate Professor of Electrical Engineering and Computer Science</b>, and a member of the <b>Theory of Computation and Complexity Theory groups</b>. He holds a <b>PhD in computer science</b> from University of California, Berkeley, a bachelor's degree from Cornell University, and a GED (General Equivalency Diploma) from New York State. Before coming to MIT, Scott worked as a postdoctoral researcher at the Institute for Advanced Study in Princeton, NJ from 2004-2005, and at the Institute for Quantum Computing at the University of Waterloo in Ontario, Canada from 2005-2007.",
+    "articles": [{
+      "id": "article0",
+      "image": "assets/images/advisor/Scott Aaronson/article0@3x.png",
+      "title": "TEDxCaltech - Scott Aaronson - Physics in the 21st Century: Toiling in Feynman's Shadow"
+    }],
+    "twitter": "",
+    "linkedin": "",
+    "article0": "",
+    "article1": ""
+  },
+  {
+    "id": "Erik-Martin",
+    "show": true,
+    "image": "assets/images/advisor/Erik Martin/main@3x.png",
+    "name": "Erik Martin",
+    "position": "Community Advisor",
+    "intro": "Erik Martin has previously worked as a marketing and community executive for Airtime, WeWork, and Depop. Erik was also the longtime <b>General Manager at Reddit (+1 Billion Users)</b>. He's been named one of the world's <b>100 most influential people by Time Magazine</b>, and a top <b>50 innovator by Adweek</b>. Erik is currently working on Earthlings, a new project focusing on how older adults are using new technologies.",
+    "articles": [{
+      "id": "article0",
+      "image": "assets/images/advisor/Erik Martin/article0@3x.png",
+      "title": "100 most influential people by Time Magazine"
+    },{
+      "id": "article1",
+      "image": "assets/images/advisor/Erik Martin/article1@3x.png",
+      "title": "top 50 innovator by Adweek"
+    }],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/erikmartin/",
+    "article0": "http://content.time.com/time/specials/packages/article/0,28804,2111975_2111976_2112126,00.html",
+    "article1": "http://www.adweek.com/brand-marketing/adweek-50-143735/"
+  },
+  {
+    "id": "Stuart-Prior",
+    "show": true,
+    "image": "assets/images/advisor/Stuart Prior/main@3x.png",
+    "name": "Stuart Prior",
+    "position": "Advisor",
+    "intro": "Stuart Prior is a “fintech veteran” with more than twenty years of experience in corporate and investment banking. He specializes in the adoption of cryptocurrency into corporate banking structures, and has spent much of his career focusing on the creation and development of banking technology, including platforms for large-scale data management. Stuart serves as ICO/Blockchain Advisor at <b>Zilliqa</b>. Previous experience at <b>Sberbank</b> as Head of Operations/IT, <b>Renaissance Capital</b> (Head Equity Technology), <b>Deutsche Bank</b> (CIO Global Rates), and <b>Credit Suisse</b> (Director of Information Technology).",
+    "articles": [],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/stuart-prior-13294456/",
+    "article0": "",
+    "article1": ""
+  },
+  {
+    "id": "Carsten-Stocker",
+    "show": true,
+    "image": "assets/images/advisor/Carsten Stocker/main@3x.png",
+    "name": "Carsten Stocker",
+    "position": "Advisor",
+    "intro": "Dr. Carsten Stöcker is <b>Founder of Spherity GmbH</b>. Spherity is a scalable decentral platform for the fourth industrial revolution providing secure identities and digital twins bridging the physical, biological and digital spheres. <b>He is a physicist by training with a Ph.D. from the University of Aachen</b>. He also serves as a <b>Council Member of Global Future Network for the World Economic Forum</b>. Prior to founding Spherity GmbH, Dr. Stöcker worked for the Machine Economy Innovation Programme at innogy SE. German Aerospace Center and Accenture GmbH.",
+    "articles": [{
+      "id": "article0",
+      "image": "assets/images/advisor/Carsten Stocker/article0@3x.png",
+      "title": "Council Member of Global Future Network World Economic Forum."
+    }],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/carsten-stoecker-1145871/",
+    "article0": "",
+    "article1": ""
+  },
+  {
+    "id": "Cristina-Dolan",
+    "show": true,
+    "image": "assets/images/advisor/Cristina Dolan/main@3x.png",
+    "name": "Cristina Dolan",
+    "position": "Advisor",
+    "intro": "Cristina Dolan is the co-founder and COO <b>iXledger</b> (formerly InsureX Technologies), an alternative blockchain marketplace for insurance with an economic layer enabled through utility tokens. She is the founder of InsideChains, which works with organizations to digitally transform business models through blockchain ecosystems with economic layers that offer members greater visibility, richer data and new business models. <b>MIT</b> Computer Science graduate. Head of Corporate Marketing & the Head of Content, Community & Communications Products at <b>TradingScreen</b>. General Partner at <b>Rudyard Partners LLC</b>.",
+    "articles": [{
+      "id": "article0",
+      "image": "assets/images/advisor/Cristina Dolan/article0.png",
+      "title": "Cristina earned a Master of Media Arts and Science from the MIT Media Lab"
+    }],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/cdolan/",
+    "article0": "",
+    "article1": ""
+  },
+  {
+    "id": "Ashish-Gaurav",
+    "show": true,
+    "image": "assets/images/advisor/Ashish Gaurav/main@3x.png",
+    "name": "Ashish Gaurav",
+    "position": "Token Growth",
+    "intro": "Experience in <b>Investment Banking, Strategy and Change Management</b>. Management of <b>Retail Banking’s global investment portfolio (~$200 million) at Standard Chartered Bank</b>. <b>MBA</b> from FMS Delhi. Head of Token Growth and Co-Founder at Token Advisors.",
+    "articles": [],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/ashish-gaurav-46268319/",
+    "article0": "",
+    "article1": ""
+  },
+  {
+    "id": "Chuan-Jin-Fong",
+    "show": true,
+    "image": "assets/images/advisor/Chuan Jin Fong/main@3x.png",
+    "name": "Chuan Jin Fong",
+    "position": "Advisor",
+    "intro": "Double Degree holder from Singapore Management University. 10 years Investment Banking experience from Morgan Stanley and Nomura across Sales & Trading and Private Wealth Management. Asia CEO and Co-Founder at Token Advisors.",
+    "articles": [],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/chuanjinfong/",
+    "article0": "",
+    "article1": ""
+  },
+  {
+    "id": "Daniel-Santos",
+    "show": true,
+    "image": "assets/images/advisor/Daniel Santos/main@3x.png",
+    "name": "Daniel Santos",
+    "position": "Board Member",
+    "intro": "Henley Business School graduate. 15 years Investment Banking experience gained at Citigroup. Barclays capital in London and Renaissance Capital in Moscow. World Economic Forum event participant in Dalian. Founder at Token Advisors.",
+    "articles": [],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/danilkafx/",
+    "article0": "",
+    "article1": ""
+  },
+  {
+    "id": "Corttrell-Kinney",
+    "show": true,
+    "image": "assets/images/advisor/Corttrell Kinney/main@3x.png",
+    "name": "Corttrell Kinney",
+    "position": "U.S. Investor Strategist",
+    "intro": "Dr. Corttrell Kinney serves as a CEO of Hyland William LLC., Member of Board of Advisors at Sunflower Solutions, LLC. Dr. Kinney serves as Director of Richmond Heights City School District. He is very active in the community as a tutor and mentor. He started The Corttrell Kinney Scholarship Fund through the Cleveland Scholarship Programs. He has helped in the early stage development of numerous small businesses and non-profit organizations. Dr. Kinney is a graduate of John Hay High School and Morehouse College. He holds a Bachelors degree in Biology. He completed his doctoral degree in the Departments of Physiology and Biophysics at Case Western Reserve University and Cell Biology at The Cleveland Clinic.Case Western Reserve University graduate. Specializes in sports and international businesses, international relations in Africa, Asia, and Middle East.",
+    "articles": [],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/corttrell-kinney-61363812/",
+    "article0": "",
+    "article1": ""
+  },
+  {
+    "id": "Yin-Nawaday",
+    "show": true,
+    "image": "assets/images/advisor/Yin Nawaday/main@3x.png",
+    "name": "Yin Nawaday",
+    "position": "Advisor",
+    "intro": "Harvard graduate. 7 years experience in global strategy at CNN and Hearst Corporation. Founder of Icebox Consulting Group and the Strategic Analytics Summit (SAS). Specializes in Global Strategy, Analytics, Big Data and Business Transformation.",
+    "articles": [],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/yynawaday/",
+    "article0": "",
+    "article1": ""
+  },
+  {
+    "id": "Kanon-Armstrong",
+    "show": true,
+    "image": "assets/images/advisor/Kanon Armstrong/main@3x.png",
+    "name": "Kanon Armstrong",
+    "position": "Consultant",
+    "intro": "Cornell Business School graduate. Product Marketing Manager at athenahealth. Senior Consultant at inVentiv Health Consulting. Consultant at Eli Lilly.",
+    "articles": [],
+    "twitter": "",
+    "linkedin": "https://www.linkedin.com/in/kanonarmstrong/",
+    "article0": "",
+    "article1": ""
+  }
+]
