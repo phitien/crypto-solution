@@ -54,7 +54,6 @@ buck-out/
 
 package-lock.json
 dest/
-admin/
 vendor/
 tmp/
 admin/tmp
