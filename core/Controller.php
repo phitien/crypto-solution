@@ -7,6 +7,12 @@ class Controller {
     $this->_router = $router;
     $this->_view = $view;
   }
+  public final function __set($n, $v) {
+		if (method_exists($this, $n)) return;
+		if (property_exists($this,$n)) return $this[$n] = $v;
+		$this->assignToView($n, $v);
+  }
+
   public final function assignToView($k, $v = null) {$this->_view->assign($k,$v);return $this;}
   public final function router() {return $this->_router;}
   public final function route() {return $this->router()->route();}

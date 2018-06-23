@@ -5,6 +5,6 @@ class Controller_Index extends Controller {
     $this->_model = new Model_Category;
   }
   public function index() {
-    $this->assignToView('title', 'asdadad');
+    // $this->title = '11111';
   }
 }

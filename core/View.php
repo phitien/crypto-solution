@@ -1,6 +1,7 @@
 <?php
 class View {
   protected $_tpl;
+  protected $_res;
   protected $_contentTpl;
   protected $_header;
   protected $_left;
@@ -9,6 +10,9 @@ class View {
   protected $_footer;
   public function __construct($tpl) {
     $this->_contentTpl = $tpl;
+    $this->_tpl = new Template;
+    $this->_res = ['responseText' => ''];
+    Event::publish($this, "beforerender", $this->_tpl, $this->_res);
   }
   public final function assign($k, $v = null) {
     $this->template()->set($k,$v);
@@ -20,15 +24,13 @@ class View {
   public function render() {
     $ajax = Request::ajax();
     $tpl = new Template;
-    $res = ['responseText' => ''];
-    Event::publish($this, "beforerender", $tpl, $res);
     $content = $this->renderContent();
-    $header = $this->renderHeader();
-    $left = $this->renderLeft();
-    $right = $this->renderRight();
-    $footer = $this->renderFooter();
-    $debug = $this->renderDebug();
-    $tpl->set([
+    $header = $ajax ? "" : $this->renderHeader();
+    $left = $ajax ? "" : $this->renderLeft();
+    $right = $ajax ? "" : $this->renderRight();
+    $footer = $ajax ? "" : $this->renderFooter();
+    $debug = $ajax ? "" : $this->renderDebug();
+    $this->_tpl->set([
       'content' => $content,
       'header' => $header,
       'left' => $left,
@@ -36,9 +38,9 @@ class View {
       'footer' => $footer,
       'debug' => $debug,
     ]);
-    $res['responseText'] .= $tpl->render("layout");
-    Event::publish($this, "afterrender", $tpl, $ajax ? $content : $res);
-    return $res['responseText'];
+    $this->_res['responseText'] .= $ajax ? $content : $this->_tpl->render("layout");
+    Event::publish($this, "afterrender", $this->_tpl, $this->_res);
+    return $this->_res['responseText'];
   }
   public function renderHeader() {
     return $this->template()->render("elements/header");
