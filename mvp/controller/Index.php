@@ -6,5 +6,7 @@ class Controller_Index extends Controller {
   }
   public function index() {
     // $this->title = '11111';
+    // $this->hasLeft(false);
+    // $this->hasRight(false);
   }
 }

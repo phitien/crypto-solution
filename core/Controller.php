@@ -1,11 +1,25 @@
 <?php
 class Controller {
+  //*Note: the controller should be working even without those traits
+  use Inject_Html;
+  use Inject_Action;
+
   protected $_router;
   protected $_model;
   protected $_view;
+  protected $_hasLeft;
+  protected $_hasRight;
+  protected $_hasFooter;
+  protected $_hasHeader;
   public function __construct(Router $router, View $view) {
     $this->_router = $router;
     $this->_view = $view;
+    $this->pageClassName = str_replace('controller_', '', strtolower(get_class($this)));
+    $this->title = APP_NAME;
+    $this->hasLeft(true);
+    $this->hasRight(true);
+    $this->hasHeader(true);
+    $this->hasFooter(true);
   }
   public final function __set($n, $v) {
 		if (method_exists($this, $n)) return;
@@ -13,7 +27,6 @@ class Controller {
 		$this->assignToView($n, $v);
   }
 
-  public final function assignToView($k, $v = null) {$this->_view->assign($k,$v);return $this;}
   public final function router() {return $this->_router;}
   public final function route() {return $this->router()->route();}
   public final function app() {return $this->router()->app();}
@@ -23,14 +36,26 @@ class Controller {
   public final function pinfo($pinfo = null) {$this->app()->pinfo($pinfo);}
   public final function setMimeType($v) {$this->app()->setMimeType($v);return $this;}
   public final function model() {return $this->_model;}
-  public function index() {
-    $results = $this->model()->page(Request::data());
-    $this->pinfo($this->model()->pinfo());
-    return $results;
+
+  public final function assignToView($k, $v = null) {$this->_view->assign($k,$v);return $this;}
+  public final function hasLeft($v=null) {
+    if ($v === null) return $this->_hasLeft;
+    $this->assignToView('hasLeft', $this->_hasLeft = $v);
+    return $this;
   }
-  public function all() {return $this->model()->fetch(Request::data());}
-  public function detail() {return $this->model()->load(Request::uid());}
-  public function create() {return $this->model()->load(Request::uid())->set(Request::data())->add();}
-  public function update() {return $this->model()->load(Request::uid())->set(Request::data())->edit();}
-  public function delete() {return $this->model()->load(Request::uid())->remove();}
+  public final function hasRight($v=null) {
+    if ($v === null) return $this->_hasRight;
+    $this->assignToView('hasRight', $this->_hasRight = $v);
+    return $this;
+  }
+  public final function hasHeader($v=null) {
+    if ($v === null) return $this->_hasHeader;
+    $this->assignToView('hasHeader', $this->_hasHeader = $v);
+    return $this;
+  }
+  public final function hasFooter($v=null) {
+    if ($v === null) return $this->_hasFooter;
+    $this->assignToView('hasFooter', $this->_hasFooter = $v);
+    return $this;
+  }
 }

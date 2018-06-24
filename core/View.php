@@ -1,5 +1,6 @@
 <?php
 class View {
+  protected $_controller;
   protected $_tpl;
   protected $_res;
   protected $_contentTpl;
@@ -21,14 +22,20 @@ class View {
     if (!$this->_tpl) $this->_tpl = new Template;
     return $this->_tpl;
   }
+  public final function controller($v = null) {
+    if (!$v) return $this->_controller;
+    $this->_controller = $v;
+    return $this;
+  }
   public function render() {
     $ajax = Request::ajax();
     $tpl = new Template;
-    $content = $this->renderContent();
-    $header = $ajax ? "" : $this->renderHeader();
-    $left = $ajax ? "" : $this->renderLeft();
-    $right = $ajax ? "" : $this->renderRight();
-    $footer = $ajax ? "" : $this->renderFooter();
+    $this->renderCustom();
+    $content = $this->template()->render($this->_contentTpl);
+    $left = $ajax || !$this->controller()->hasLeft() ? "" : $this->template()->render("elements/left");
+    $right = $ajax || !$this->controller()->hasRight() ? "" : $this->template()->render("elements/right");
+    $header = $ajax || !$this->controller()->hasHeader() ? "" : $this->template()->render("elements/header");
+    $footer = $ajax || !$this->controller()->hasFooter() ? "" : $this->template()->render("elements/footer");
     $debug = $ajax ? "" : $this->renderDebug();
     $this->_tpl->set([
       'content' => $content,
@@ -42,21 +49,6 @@ class View {
     Event::publish($this, "afterrender", $this->_tpl, $this->_res);
     return $this->_res['responseText'];
   }
-  public function renderHeader() {
-    return $this->template()->render("elements/header");
-  }
-  public function renderLeft() {
-    return $this->template()->render("elements/left");
-  }
-  public function renderContent() {
-    return $this->template()->render($this->_contentTpl);
-  }
-  public function renderRight() {
-    return $this->template()->render("elements/right");
-  }
-  public function renderFooter() {
-    return $this->template()->render("elements/footer");
-  }
   public function renderDebug() {
     if (DEBUG && !empty(Session::logs())) {
       $this->template()->set('logs', Session::logs());
@@ -65,5 +57,19 @@ class View {
       return $rs;
     }
     return "";
+  }
+  public function renderCustom() {
+    $dir = APP_DIR."/views/elements/custom";
+    if (!is_dir($dir)) return;
+    $options = [];
+    foreach(scandir($dir, 1) as $f) {
+      $p = "$dir/$f";
+      $rs = is_file($p);
+      if ($rs) {
+        $info = pathinfo($p);
+        $prop = $info['filename'];
+        $this->_tpl->set($prop, $this->template()->render("elements/custom/$prop"));
+      }
+    }
   }
 }

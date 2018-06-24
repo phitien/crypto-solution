@@ -24,7 +24,7 @@ class Database {
 			if ($psize) $limit = "LIMIT $page,$psize";
 			self::$sql = self::$sql." $join $where $limit";
 		}
-		Log::info(self::$sql);
+		Log::sql(self::$sql);
 		$conn = self::$conn;
 		$stmt = $conn->prepare(self::$sql);
 		$stmt->execute();
@@ -45,8 +45,8 @@ class Database {
     return self::one($sql);
   }
 	public static function commit($sql, array $values) {
-		Log::info($sql);
-		Log::info($values);
+		Log::sql($sql);
+		Log::sql($values);
 		self::$sql = $sql;
 		$conn = self::$conn;
 		$stmt = $conn->prepare(self::$sql);

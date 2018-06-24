@@ -12,8 +12,9 @@ class Template {
   }
   public function __construct($data = []) {
     $this->_data = $data;
-    $this->setconfig($this->_config, CORE_DIR);
-    $this->setconfig($this->_config, APP_DIR);
+    $this
+      ->setconfig($this->_config, CORE_DIR)
+      ->setconfig($this->_config, APP_DIR);
   }
   public function set($k,$v=null) {
     if (is_string($k)) self::$smarty->assign($k,$v);
@@ -31,7 +32,7 @@ class Template {
     return $this;
   }
   public function setconfig(&$config, $dir) {
-    $dir = CORE_DIR."/config";
+    $dir = $dir."/config";
     foreach(scandir($dir, 1) as $f) {
       $p = "$dir/$f";
       $rs = is_file($p);
@@ -45,6 +46,7 @@ class Template {
         $config[$prop] = $klass;
       }
     }
+    return $this;
   }
   public function render($tpl) {
     $path = APP_DIR."/views";

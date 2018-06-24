@@ -89,6 +89,7 @@ class Router {
   protected final function _check_controller() {
     $klass = "Controller_{$this->_controllerName}";
     $this->_controller = new $klass($this, $this->view());
+    $this->view()->controller($this->controller());
     Log::info("Controller:"."Controller_{$this->_controllerName}");
     if (!method_exists($this->controller(), $this->handler()))
       throw new Exception_NotFound(sprintf("Handler '%s' is missing in Controller '%s'", $handler, $this->_controllerName));
