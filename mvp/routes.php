@@ -4,7 +4,7 @@ Router::add('index', [
   'actions' => [
     'json' => ['mime-type' => 'json'],
     'json' => ['public' => true, 'mime-type' => 'json'],
-    'json' => ['public' => true, 'method' => 'json', 'mime-type' => 'json'],
+    'json' => ['public' => true, 'method' => 'get', 'mime-type' => 'json'],
     'json' => ['public' => true, 'method' => ['handler' => 'json', 'mime-type' => 'json']],
     'json' => ['public' => true, 'method' => ['get' => 'json', 'post' => '*json', 'mime-type' => 'json']],
     'json' => ['public' => true, 'method' => [

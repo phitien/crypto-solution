@@ -26,13 +26,15 @@ class Application {
     Request::init();
     Database::init();
     Template::init();
-    $this->_router = new Router($this);
     $this->router()->authenticate();
     $this->router()->authorise();
     $this->response();
   }
   public final function response() {return $this->results($this->router()->response());}
-  public final function router() {return $this->_router;}
+  public final function router() {
+    if (!$this->_router) $this->_router = new Router($this);
+    return $this->_router;
+  }
   public function api_results($results = null) {
     $data = $results instanceof Model ? $results->output : $results;
     $res = new stdClass();

@@ -33,6 +33,7 @@ class Template {
   }
   public function setconfig(&$config, $dir) {
     $dir = $dir."/config";
+    if (!is_dir($dir)) return;
     foreach(scandir($dir, 1) as $f) {
       $p = "$dir/$f";
       $rs = is_file($p);

@@ -53,7 +53,7 @@ class Router {
   }
   //'json' => ['mime-type' => 'json'],
   //'json' => ['public' => true, 'mime-type' => 'json'],
-  //'json' => ['public' => true, 'method' => 'json', 'mime-type' => 'json'],
+  //'json' => ['public' => true, 'method' => 'get', 'mime-type' => 'json'],
   //'json' => ['public' => true, 'method' => ['handler' => 'json', 'mime-type' => 'json']],
   //'json' => ['public' => true, 'method' => ['get' => 'json', 'post' => '*json', 'mime-type' => 'json']],
   //'json' => ['public' => true, 'method' => [
@@ -63,10 +63,14 @@ class Router {
   //]],
   // PUT * before handler for private access
   protected final function _check_access($route) {
-    if (!isset($route['method']) || is_string($route['method'])) return isset($route['public']) ? ($route['public'] ? true : false) : true;
+    $public = isset($route['public']) ? ($route['public'] ? true : false) : true;
+    if (!isset($route['method'])) return $public;
     $method = $route['method'];
+    if (in_array($method, ['*','all','any'])) return $public;
     $rmethod = Request::method();
-    return !isset($method[$rmethod]) || array_key_exists($rmethod, $method);
+    if (is_string($route['method'])) return $method == $rmethod;
+    if (!isset($method[$rmethod])) return $public;
+    return array_key_exists($rmethod, $method);
   }
   protected final function _get_mime_type($route) {
     if (Request::ajax()) return 'json';
@@ -85,14 +89,15 @@ class Router {
   }
   protected final function _get_handler($route) {
     $aname = strpos($this->_actionName, "/:") ? explode("/", $this->_actionName)[0] : $this->_actionName;
-    if (!isset($route['method'])) return $aname;
-    $handler = $route['method'];
-    if (is_string($handler)) return $handler;
+    $handler = isset($route['handler']) ? $route['handler'] : $aname;
+    if (!isset($route['method'])) return $handler;
+    if (is_string($route['method'])) return $handler;
     $rmethod = Request::method();
-    if (!isset($handler[$rmethod])) return isset($handler['handler']) ? $handler['handler'] : $aname;
-    $handler = $handler[$rmethod];
-    if (is_string($handler)) return $handler;
-    return isset($handler['handler']) ? $handler['handler'] : $aname;
+    $handler = isset($route['method']['handler']) ? $route['method']['handler'] : $handler;
+    if (!isset($route['method'][$rmethod])) return $handler;
+    if (is_string($route['method'][$rmethod])) return $handler;
+    $handler = isset($route['method'][$rmethod]['handler']) ? $route['method'][$rmethod]['handler'] : $handler;
+    return $handler;
   }
   protected final function _set_handler() {
     $route = $this->route();
