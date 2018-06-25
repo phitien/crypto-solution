@@ -12,8 +12,8 @@ class View {
   public function __construct($tpl) {
     $this->_contentTpl = $tpl;
     $this->_tpl = new Template;
-    $this->_res = ['responseText' => ''];
-    Event::publish($this, "beforerender", $this->_tpl, $this->_res);
+    $this->_res = ['html' => ''];
+    $this->_res = Event::publish($this, "beforerender", $this->_tpl, $this->_res);
   }
   public final function assign($k, $v = null) {
     $this->template()->set($k,$v);
@@ -45,9 +45,9 @@ class View {
       'footer' => $footer,
       'debug' => $debug,
     ]);
-    $this->_res['responseText'] .= $ajax ? $content : $this->_tpl->render("layout");
-    Event::publish($this, "afterrender", $this->_tpl, $this->_res);
-    return $this->_res['responseText'];
+    $this->_res['html'] .= $ajax ? $content : $this->_tpl->render("layout");
+    $this->_res = Event::publish($this, "afterrender", $this->_tpl, $this->_res);
+    return $this->_res['html'];
   }
   public function renderDebug() {
     if (DEBUG && !empty(Session::logs())) {

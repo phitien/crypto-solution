@@ -12,6 +12,6 @@ class Event {
     $instance = new $klass;
     Log::info("Hanlder:$klass::$action");
     Log::info("Callee", $callee);
-    if (method_exists($instance, $action)) call_user_func_array([$instance, $action], $args);
+    if (method_exists($instance, $action)) return call_user_func_array([$instance, $action], $args);
   }
 }
