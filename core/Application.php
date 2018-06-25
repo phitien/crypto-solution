@@ -20,7 +20,6 @@ class Application {
     'audio' => 'audio/*',
     'mp4' => 'video/mp4',
   ];
-  protected $_mime_type = APP_TYPE;
   public function __construct($routes = null) {
     set_exception_handler([$this, 'exception_handler']);
     Session::init();
@@ -28,11 +27,12 @@ class Application {
     Database::init();
     Template::init();
     $this->_router = new Router($this);
+    $this->router()->authenticate();
+    $this->router()->authorise();
     $this->response();
   }
-  public final function response() {return $this->results($this->_router->response());}
+  public final function response() {return $this->results($this->router()->response());}
   public final function router() {return $this->_router;}
-  public final function setMimeType($v) {$this->_mime_type = $v;return $this;}
   public function api_results($results = null) {
     $data = $results instanceof Model ? $results->output : $results;
     $res = new stdClass();
@@ -47,11 +47,10 @@ class Application {
   public function results($results = null, $status = 200) {
     // ob_end_clean();
     // ob_start();
-    $mime_type = Request::get('api') ? 'json' : $this->_mime_types[$this->_mime_type];
-    if (!$mime_type) $mime_type = $this->_mime_types['html'];
+    $mime_type = $this->router()->mime_type();
     header("HTTP/1.1 $status ERROR");
     header("Content-Type: $mime_type");
-    if (in_array($this->_mime_type, ['api', 'json'])) return $this->api_results($results);
+    if ($mime_type == 'json') return $this->api_results($results);
     print_r($results);
   }
   public function error($error, $status = 500) {$this->results(is_object($error) ? $error : ['error' => $error], $status);}

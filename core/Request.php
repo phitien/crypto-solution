@@ -25,7 +25,7 @@ class Request {
     return self::get('uid');
   }
   public final static function ajax() {
-    return self::get('ajax') ? true : false;
+    return self::get('ajax') || self::get('api') ? true : false;
   }
   public final static function method() {
     return strtolower($_SERVER['REQUEST_METHOD']);

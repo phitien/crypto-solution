@@ -21,12 +21,12 @@ class Event_View {
   }
   public function beforeplugins() {
     return array_filter(array_values($this->_plugins), function($p) {
-      return $p->runbefore();
+      return $p->type() == 'html' && $p->runbefore();
     });
   }
   public function afterplugins() {
     return array_filter(array_values($this->_plugins), function($p) {
-      return !$p->runbefore();
+      return $p->type() == 'html' && !$p->runbefore();
     });
   }
   public function beforerender($view, $action = "index", $tpl, $res) {

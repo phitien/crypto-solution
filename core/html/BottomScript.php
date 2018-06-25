@@ -6,7 +6,7 @@ class Html_BottomScript extends Html_Dom {
     if (is_string($this->_d)) $html = sprintf("<script>%s</script>", $this->_d);
     else {
       $props = [];$text = "";
-      $this->prop($props, 'defer','true');
+      // $this->prop($props, 'defer','true');
       foreach($this->_d as $k => $v) {
         if ($k == 'content') $text = $v;
         else $this->prop($props,$k,$v);

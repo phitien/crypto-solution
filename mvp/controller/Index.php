@@ -9,4 +9,7 @@ class Controller_Index extends Controller {
     // $this->hasLeft(false);
     // $this->hasRight(false);
   }
+  public function json() {
+    return $this->model()->fetch(Request::data());
+  }
 }

@@ -1,5 +1,6 @@
 RewriteEngine ON
-RewriteRule ^/?([a-z]+)(/([a-z]+)(/([a-z0-9]+))?)?$ index.php?controller=$1&action=$3&uid=$5 [QSA,L]
+RewriteRule ^/$ index.php?controller=index&action=index [QSA,NC,L]
+RewriteRule ^/?([a-z]+)(/([a-z]+)(/([a-z0-9]+))?)?$ index.php?controller=$1&action=$3&uid=$5 [QSA,NC,L]
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d

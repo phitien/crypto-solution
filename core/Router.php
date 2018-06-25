@@ -12,24 +12,23 @@ class Router {
   protected $_handler;
   protected $_public;
   protected $_mime_type = APP_TYPE;
-  protected $_template = APP_TYPE;
+  protected $_template = null;
   public function __construct(App $app, $routes = null) {
     $this->_app = $app;
-    $this->_set_mime_type();
     $this->_set_controller();
     $this->_set_action();
     $this->_set_route();
     $this->_set_handler();
     $this->_set_view();
-    $this->_check_controller();
+    $this->_init();
+  }
+  public final function authenticate() {
     $this->_authentication = new Authentication($this);
     $this->_authentication->execute();
+  }
+  public final function authorise() {
     $this->_authorization = new Authorization($this);
     $this->_authorization->execute();
-  }
-  protected final function _set_mime_type() {
-    if (Request::get('api')) $this->_mime_type = 'json';
-    if ($this->_mime_type == 'api') $this->_mime_type = 'json';
   }
   protected final function _set_controller() {
     if (empty(Request::get('controller'))) Request::set('controller', 'index');
@@ -40,7 +39,7 @@ class Router {
     $uid = Request::get('uid');
     $this->_actionName = Request::get('action');
     $this->_actionName = $uid ? "{$this->_actionName}/:uid" : $this->_actionName;
-    Log::info("Action:".$this->action());
+    Log::info("Action: ".$this->action());
   }
   protected final function _set_route() {
     $cname = lcfirst($this->_controllerName);
@@ -50,31 +49,65 @@ class Router {
     if (!array_key_exists($aname, $routes)) throw new Exception_NotFound(sprintf("Action '%s' is not accessible in Controller '%s'", $aname, $this->_controllerName));
     $this->_route = $route = $routes[$aname];
     $this->_public = true;
-    if (isset($route['public'])) $this->_public = $route['public'] ? true : false;
-    Log::info("Route", $this->route());
+    Log::info("Route: ", $this->route());
   }
-  protected final function _set_handler() {
-    $aname = strpos($this->_actionName, "/:") ? explode("/", $this->_actionName)[0] : $this->_actionName;
-    $route = $this->route();
+  //'json' => ['mime-type' => 'json'],
+  //'json' => ['public' => true, 'mime-type' => 'json'],
+  //'json' => ['public' => true, 'method' => 'json', 'mime-type' => 'json'],
+  //'json' => ['public' => true, 'method' => ['handler' => 'json', 'mime-type' => 'json']],
+  //'json' => ['public' => true, 'method' => ['get' => 'json', 'post' => '*json', 'mime-type' => 'json']],
+  //'json' => ['public' => true, 'method' => [
+  //  'get' => ['handler' => 'json', 'mime-type' => 'json'],
+  //  'post' => '*json',
+  //  'mime-type' => 'json'
+  //]],
+  // PUT * before handler for private access
+  protected final function _check_access($route) {
+    if (!isset($route['method']) || is_string($route['method'])) return isset($route['public']) ? ($route['public'] ? true : false) : true;
     $method = $route['method'];
     $rmethod = Request::method();
-    Log::info("RequestMethod:".Request::method());
-    $handler = empty($route['handler']) ? $aname : $route['handler'];
-    if (!is_string($method) && array_key_exists($rmethod, $method)) $handler = $method[$rmethod];
-    if (
-      empty($method)
-      || in_array($method, ['*', 'all', 'any'])
-      || $method == $rmethod
-      || (!is_string($method) && array_key_exists($rmethod, $method))
-    ) {}//do nothing
-    else throw new Exception_Invalid(sprintf("Method '%s' is not supported", $rmethod));
+    return !isset($method[$rmethod]) || array_key_exists($rmethod, $method);
+  }
+  protected final function _get_mime_type($route) {
+    if (Request::ajax()) return 'json';
+    $mime_type = APP_TYPE;
+    if (isset($route['mime-type'])) $mime_type = $route['mime-type'];
+    if (isset($route['method']) && !is_string($route['method'])) {
+      $route = $route['method'];
+      if (isset($route['mime-type'])) $mime_type = $route['mime-type'];
+      $rmethod = Request::method();
+      if (isset($route[$rmethod])) {
+        $route = $route[$rmethod];
+        if (isset($route['mime-type'])) $mime_type = $route['mime-type'];
+      }
+    }
+    return $mime_type;
+  }
+  protected final function _get_handler($route) {
+    $aname = strpos($this->_actionName, "/:") ? explode("/", $this->_actionName)[0] : $this->_actionName;
+    if (!isset($route['method'])) return $aname;
+    $handler = $route['method'];
+    if (is_string($handler)) return $handler;
+    $rmethod = Request::method();
+    if (!isset($handler[$rmethod])) return isset($handler['handler']) ? $handler['handler'] : $aname;
+    $handler = $handler[$rmethod];
+    if (is_string($handler)) return $handler;
+    return isset($handler['handler']) ? $handler['handler'] : $aname;
+  }
+  protected final function _set_handler() {
+    $route = $this->route();
+    if (!$this->_public = $this->_check_access($route)) throw new Exception_Invalid(sprintf("Method '%s' is not supported", $rmethod));
+    $this->_mime_type = $this->_get_mime_type($route);
+    $this->_handler = $this->_get_handler($route);
+    $handler = $this->handler();
     if (strpos($handler, "*") !== false) {
-      $handler = str_replace("*", "", $handler);
+      $this->_handler = str_replace("*", "", $handler);
       $this->_public = false;
     }
-    $this->_handler = $handler;
-    Log::info("Handler:".$this->handler());
-    Log::info("Public:".$this->isPublic());
+    Log::info("RequestMethod: ".Request::method());
+    Log::info("Public: ".$this->isPublic());
+    Log::info("MimeType: ".$this->mime_type());
+    Log::info("Handler: ".$this->handler());
     return $this;
   }
   protected final function _set_view() {
@@ -82,17 +115,20 @@ class Router {
     if ($this->mime_type() != 'json') {
       $this->_template = !empty($route['view']) ? $route['view'] :
         lcfirst($this->_controllerName)."/".lcfirst($this->handler());
-      Log::info("Template:".$this->template());
     }
     $this->_view = new View($this->template());
+    Log::info("Template: ".$this->template());
+    return $this;
   }
-  protected final function _check_controller() {
+  protected final function _init() {
     $klass = "Controller_{$this->_controllerName}";
     $this->_controller = new $klass($this, $this->view());
     $this->view()->controller($this->controller());
-    Log::info("Controller:"."Controller_{$this->_controllerName}");
-    if (!method_exists($this->controller(), $this->handler()))
+    $handler = $this->handler();
+    if (!method_exists($this->controller(), $handler))
       throw new Exception_NotFound(sprintf("Handler '%s' is missing in Controller '%s'", $handler, $this->_controllerName));
+    Log::info("Controller: "."Controller_{$this->_controllerName}");
+    return $this;
   }
   public final function app() {return $this->_app;}
   public final function controller() {return $this->_controller;}
@@ -108,7 +144,9 @@ class Router {
   public final function mime_type() {return $this->_mime_type;}
   public final function template() {return $this->_template;}
   public final function response() {
-    if ($this->mime_type() == 'json') return $this->controller()->{$this->handler()}();
+    if ($this->mime_type() == 'json') {
+      return $this->controller()->{$this->handler()}();
+    }
     $this->controller()->{$this->handler()}();
     return $this->view()->render();
   }

@@ -28,14 +28,14 @@ class View {
     return $this;
   }
   public function render() {
-    $ajax = Request::ajax();
+    if ($this->controller()->router()->mime_type() == 'json') return;
     $tpl = new Template;
     $this->renderCustom();
     $content = $this->template()->render($this->_contentTpl);
-    $left = $ajax || !$this->controller()->hasLeft() ? "" : $this->template()->render("elements/left");
-    $right = $ajax || !$this->controller()->hasRight() ? "" : $this->template()->render("elements/right");
-    $header = $ajax || !$this->controller()->hasHeader() ? "" : $this->template()->render("elements/header");
-    $footer = $ajax || !$this->controller()->hasFooter() ? "" : $this->template()->render("elements/footer");
+    $left = !$this->controller()->hasLeft() ? "" : $this->template()->render("elements/left");
+    $right = !$this->controller()->hasRight() ? "" : $this->template()->render("elements/right");
+    $header = !$this->controller()->hasHeader() ? "" : $this->template()->render("elements/header");
+    $footer = !$this->controller()->hasFooter() ? "" : $this->template()->render("elements/footer");
     $debug = $ajax ? "" : $this->renderDebug();
     $this->_tpl->set([
       'content' => $content,
