@@ -10,7 +10,7 @@ class Model_User extends Model {
 		'password',
 	];
 	protected $_joins = [
-		'profile' => "`profile`.`id`=`profile`.`user_id`",
+		'profile' => "`user`.`id`=`profile`.`user_id`",
 	];
 	public function joinfields() {
 		return array_merge(['user.id AS user_id', 'profile.id AS profile_id'], $this->fields([

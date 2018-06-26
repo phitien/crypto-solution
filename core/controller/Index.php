@@ -1,15 +1,15 @@
 <?php
 class Controller_Index extends Controller {
   public function signin() {
-    if (!empty(Request::get('facebook'))) $this->response($this->user()->signin(Request::data(), 'facebook'));
-		if (!empty(Request::get('twitter'))) $this->response($this->user()->signin(Request::data(), 'twitter'));
-		if (!empty(Request::get('linkedin'))) $this->response($this->user()->signin(Request::data(), 'linkedin'));
+    if (!empty(Request::get('facebook'))) return $this->user()->signin(Request::data(), 'facebook');
+		if (!empty(Request::get('twitter'))) return $this->user()->signin(Request::data(), 'twitter');
+		if (!empty(Request::get('linkedin'))) return $this->user()->signin(Request::data(), 'linkedin');
     return $this->user()->signin(Request::data('email', 'password'));
   }
   public function signup() {
-    if (!empty(Request::get('facebook'))) $this->response($this->user()->signin(Request::data(), 'facebook'));
-		if (!empty(Request::get('twitter'))) $this->response($this->user()->signin(Request::data(), 'twitter'));
-		if (!empty(Request::get('linkedin'))) $this->response($this->user()->signin(Request::data(), 'linkedin'));
+    if (!empty(Request::get('facebook'))) return $this->user()->signin(Request::data(), 'facebook');
+		if (!empty(Request::get('twitter'))) return $this->user()->signin(Request::data(), 'twitter');
+		if (!empty(Request::get('linkedin'))) return $this->user()->signin(Request::data(), 'linkedin');
 		return $this->user()->signup(Request::data());
   }
   public function signout() {return $this->user()->signout();}

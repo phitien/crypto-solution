@@ -3,7 +3,7 @@ class Event_Model_User extends Event {
   public function add($user, $action = "index", $data = null) {
     Log::info('User added');
     $profile = new Model_Profile();
-		$profile->set($user->output)->add(false);
+		$profile->set($user->output)->set('user_id', $user->id)->add(false);
     if (EMAIL_VERIFICATION)
     Util::send([
       'subject' => t("%s - Email Verification", APP_NAME),

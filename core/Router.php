@@ -13,12 +13,13 @@ class Router {
   protected $_public;
   protected $_mime_type = APP_TYPE;
   protected $_template = null;
+  protected $_pinfo;
   public function __construct(App $app, $routes = null) {
     $this->_app = $app;
     $this->_set_controller();
     $this->_set_action();
     $this->_set_route();
-    $this->_set_handler();
+    $this->_set_params();
     $this->_set_view();
     $this->_init();
   }
@@ -49,7 +50,7 @@ class Router {
     if (!array_key_exists($aname, $routes)) throw new Exception_NotFound(sprintf("Action '%s' is not accessible in Controller '%s'", $aname, $this->_controllerName));
     $this->_route = $route = $routes[$aname];
     $this->_public = true;
-    Log::info("Route: ", $this->route());
+    Log::info("Route: $aname : ", $this->route());
   }
   //'json' => ['mime-type' => 'json'],
   //'json' => ['public' => true, 'mime-type' => 'json'],
@@ -95,11 +96,11 @@ class Router {
     $rmethod = Request::method();
     $handler = isset($route['method']['handler']) ? $route['method']['handler'] : $handler;
     if (!isset($route['method'][$rmethod])) return $handler;
-    if (is_string($route['method'][$rmethod])) return $handler;
+    if (is_string($route['method'][$rmethod])) return $route['method'][$rmethod];
     $handler = isset($route['method'][$rmethod]['handler']) ? $route['method'][$rmethod]['handler'] : $handler;
     return $handler;
   }
-  protected final function _set_handler() {
+  protected final function _set_params() {
     $route = $this->route();
     if (!$this->_public = $this->_check_access($route)) throw new Exception_Invalid(sprintf("Method '%s' is not supported", $rmethod));
     $this->_mime_type = $this->_get_mime_type($route);
@@ -148,13 +149,6 @@ class Router {
   public final function authorization() {return $this->_authorization;}
   public final function mime_type() {return $this->_mime_type;}
   public final function template() {return $this->_template;}
-  public final function response() {
-    if ($this->mime_type() == 'json') {
-      return $this->controller()->{$this->handler()}();
-    }
-    $this->controller()->{$this->handler()}();
-    return $this->view()->render();
-  }
   public final static function add($n, $v = null) {
     $actions = [
       'index' => ['method' => ['get' => 'index', 'post' => '*create']],
@@ -167,5 +161,25 @@ class Router {
       'controller' => $controller,
       'actions' => $actions,
     ];
+  }
+  public function pinfo($pinfo = null) {$this->_pinfo = $pinfo;return $this;}
+  public final function response() {
+    $results = $this->controller()->{$this->handler()}();
+    if ($results instanceof Model) {
+      $results = $results->output;
+      $this->view()->assign('results', $results);
+    }
+    if ($this->mime_type() == 'json') {
+      $res = new stdClass();
+      $res->results = $results;
+      if ($this->_pinfo) $res->pinfo = $this->_pinfo;
+      if (DEBUG && !empty(Session::logs())) {
+        $res->debug = Session::logs();
+        Session::clean();
+      }
+      $this->view()->assign('response', $res);
+    }
+    $this->controller()->{$this->handler()}();
+    return $this->view()->render();
   }
 }

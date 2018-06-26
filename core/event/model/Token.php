@@ -1,14 +1,13 @@
 <?php
 class Event_Model_Token extends Event {
-  public function add($o, $action = "index", $data = null) {
-  }
+  public function add($o, $action = "index", $data = null) {}
   public function edit($o, $action = "index", $data = null) {
     $o->user()->reset($o->output)->set('id', $o->user_id)->edit(true);
   }
-  public function remove($o, $action = "index", $data = null) {
-  }
+  public function remove($o, $action = "index", $data = null) {}
   public function signin_failed($o, $action = "index", $data = null) {
     $user = $o->user();
+    if ($user->output && $user->status != 'active') throw new Exception_Invalid(t("Please activate your account first"));
     $user->find(['email' => $data['email']]);
     if ($user->output) $user->set('attempt', (int) $user->attempt + 1)->edit(false);
     throw new Exception_Invalid(t("Email or password is invalid"));

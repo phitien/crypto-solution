@@ -1,7 +1,6 @@
 <?php
 class Application {
   protected $_router;
-  protected $_pinfo;
   protected $_mime_types = [
     'json' => 'application/json',
     'javascript' => 'application/javascript',
@@ -35,28 +34,15 @@ class Application {
     if (!$this->_router) $this->_router = new Router($this);
     return $this->_router;
   }
-  public function api_results($results = null) {
-    $data = $results instanceof Model ? $results->output : $results;
-    $res = new stdClass();
-    $res->results = $data;
-    if ($this->_pinfo) $res->pinfo = $this->_pinfo;
-    if (DEBUG && !empty(Session::logs())) {
-      $res->debug = Session::logs();
-      Session::clean();
-    }
-    print_r(json_encode($res));
-  }
   public function results($results = null, $status = 200) {
     // ob_end_clean();
     // ob_start();
     $mime_type = $this->router()->mime_type();
     header("HTTP/1.1 $status ERROR");
     header("Content-Type: $mime_type");
-    if ($mime_type == 'json') return $this->api_results($results);
     print_r($results);
   }
   public function error($error, $status = 500) {$this->results(is_object($error) ? $error : ['error' => $error], $status);}
-  public function pinfo($pinfo = null) {$this->_pinfo = $pinfo;return $this;}
   public function exception_handler(Exception $e) {
     if (!NODEBUG && DEBUG) {
       if (!$e instanceof Exception_Exception) Log::info($e);

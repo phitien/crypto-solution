@@ -21,5 +21,10 @@ Router::add('group', [
     'remove/:uid' => ['public' => false, 'method' => 'delete'],
   ]
 ]);
+Router::add('translation', [
+  'actions' => [
+    'translate/:uid' => [],
+  ]
+]);
 Router::add('menu');
 Router::add('country');

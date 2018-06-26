@@ -12,7 +12,7 @@ class Request {
     if (!empty($_BODY)) self::$_data = array_merge(self::$_data, $_BODY);
   }
   public final static function token() {return @self::$_data['token'];}
-  public final static function get($f) {return @self::$_data[$f];}
+  public final static function get($f,$df=null) {return isset(self::$_data[$f]) ? self::$_data[$f] : $df;}
   public final static function set($f,$v) {self::$_data[$f] = $v;}
   public final static function data() {
     $fields = func_get_args();
@@ -26,6 +26,9 @@ class Request {
   }
   public final static function ajax() {
     return self::get('ajax') || self::get('api') ? true : false;
+  }
+  public final static function lang() {
+    return self::get('lang');
   }
   public final static function method() {
     return strtolower($_SERVER['REQUEST_METHOD']);

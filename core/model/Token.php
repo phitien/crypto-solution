@@ -113,6 +113,7 @@ class Model_Token extends Model {
 		$user = $this->user();
 		$user->find(['email' => $data['email'], 'password' => $data['password']]);
 		if (!$user->output) return Event::publish($this, "signin_failed", $data);
+		if ($user->status != 'active') return Event::publish($this, "signin_failed", $data);
 		Event::publish($this, "signin_successed", $data);
 		return $this->issue();
 	}

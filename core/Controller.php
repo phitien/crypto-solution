@@ -33,7 +33,7 @@ class Controller {
   public final function action() {return $this->router()->action();}
   public final function handler() {return $this->router()->handler();}
   public final function user() {return $this->router()->user();}
-  public final function pinfo($pinfo = null) {$this->app()->pinfo($pinfo);}
+  public final function pinfo($pinfo = null) {$this->router()->pinfo($pinfo);}
   public final function model() {return $this->_model;}
 
   public final function assignToView($k, $v = null) {$this->_view->assign($k,$v);return $this;}

@@ -28,7 +28,7 @@ class View {
     return $this;
   }
   public function render() {
-    if ($this->controller()->router()->mime_type() == 'json') return;
+    if ($this->controller()->router()->mime_type() == 'json') return $this->_tpl->render("json");
     $tpl = new Template;
     $this->renderCustom();
     $content = $this->template()->render($this->_contentTpl);
