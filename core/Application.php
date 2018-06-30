@@ -35,18 +35,24 @@ class Application {
     return $this->_router;
   }
   public function results($results = null, $status = 200) {
-    // ob_end_clean();
-    // ob_start();
+    ob_end_clean();
+    ob_start();
     $mime_type = $this->router()->mime_type();
     header("HTTP/1.1 $status ERROR");
     header("Content-Type: $mime_type");
-    print_r($results);
+    print_r(is_string($results) ? $results : json_encode($results));
   }
   public function error($error, $status = 500) {$this->results(is_object($error) ? $error : ['error' => $error], $status);}
   public function exception_handler(Exception $e) {
-    if (!NODEBUG && DEBUG) {
-      if (!$e instanceof Exception_Exception) Log::info($e);
+    $mime_type = $this->router()->mime_type();
+    if ($mime_type == 'html' && $e instanceof Exception_Forbidden) {//render login page
+      $this->results($this->router()->error(), 401);
     }
-    $this->error($e->getMessage(), $e->getCode());
+    else {
+      if (!NODEBUG && DEBUG) {
+        if (!$e instanceof Exception_Exception) Log::info($e);
+      }
+      $this->error($e->getMessage(), $e->getCode());
+    }
   }
 }

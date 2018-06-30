@@ -24,11 +24,11 @@ class Router {
     $this->_init();
   }
   public final function authenticate() {
-    $this->_authentication = new Authentication($this);
+    $this->_authentication = new Acl_Authentication($this);
     $this->_authentication->execute();
   }
   public final function authorise() {
-    $this->_authorization = new Authorization($this);
+    $this->_authorization = new Acl_Authorization($this);
     $this->_authorization->execute();
   }
   protected final function _set_controller() {
@@ -102,7 +102,8 @@ class Router {
   }
   protected final function _set_params() {
     $route = $this->route();
-    if (!$this->_public = $this->_check_access($route)) throw new Exception_Invalid(sprintf("Method '%s' is not supported", $rmethod));
+    $rmethod = Request::method();
+    $this->_public = $this->_check_access($route);
     $this->_mime_type = $this->_get_mime_type($route);
     $this->_handler = $this->_get_handler($route);
     $handler = $this->handler();
@@ -180,6 +181,11 @@ class Router {
       $this->view()->assign('response', $res);
     }
     $this->controller()->{$this->handler()}();
+    return $this->view()->render();
+  }
+  public final function error() {
+    $this->controller()->error();
+    $this->controller()->layout('login');
     return $this->view()->render();
   }
 }

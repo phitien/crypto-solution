@@ -3,10 +3,10 @@ html,body {
 }
 body {
   font-family: $font-family;
-  font-size: $font-size;
-  font-weight: $font-weight;
-  color: $color;
-  background-color: $primary-blur;
+  font-size: 13px;
+  font-weight: 400;
+  color: #34333b;
+  background-color: #fff;
   margin: 0;padding: 0;
   * {box-sizing: border-box;}
   a {
@@ -66,6 +66,8 @@ body {
     margin: $mapa/3 0;
   }
 }
+.container-fluid {margin: 0 auto;padding: 0;width: 100%;display: block;}
+.container {margin: 0 auto;padding: 0;clear: both;display: block;}
 .hidden {display: none;}
 .flex1 {flex: 1;}
 .flex2 {flex: 2;}
@@ -224,15 +226,15 @@ body {
 .yellow-text {color: $yellow;}
 .yellow-background {background-color: $bg-yellow;}
 
-.tiny {font-size: $font-size-tiny;}
-.small {font-size: $font-size-small;}
-.normal {font-size: $font-size;}
-.big {font-size: $font-size-big;}
-.large {font-size: $font-size-large;}
-.huge {font-size: $font-size-huge;}
-.super {font-size: $font-size-super;}
-.giant {font-size: $font-size-giant;}
-.heading {font-size: $font-size-super;}
+.tiny {font-size: 9px;}
+.small {font-size: 11px;}
+.normal {font-size: 13px;}
+.big {font-size: 16px;}
+.large {font-size: 16px;}
+.huge {font-size: 16px;}
+.super {font-size: 16px;}
+.giant {font-size: 16px;}
+.heading {font-size: 16px;}
 .title {font-size: $font-size-large;}
 .images {
   display: block;justify-content: center;align-items: center;
@@ -354,3 +356,13 @@ i.fa {
 }
 .private {display: none;}
 .logged .private {display: block;}
+.currency {
+  &:before {content: '$';}
+}
+.percentage {
+  &:after {content: '%';}
+}
+.subscribebox {
+  display: flex;
+  .button {margin-left: 8px;}
+}

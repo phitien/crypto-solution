@@ -3,5 +3,7 @@
   "title": "SOZO",
   "description": "",
   "charset": "utf-8",
-  "noscript": "Your browser does not support JavaScript!"
+  "noscript": "Your browser does not support JavaScript!",
+  "logo": "static/images/logo.png",
+  "baseurl": "/"
 }

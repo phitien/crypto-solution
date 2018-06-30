@@ -92,5 +92,5 @@ class Util {
   public static function encrypt($str) {return Hash::make($str);}
   public static function decrypt($str) {return Hash::make($str);}
   public static function uniqid() {return self::password(uniqid());}
-  public static function json($path) {return json_decode(file_get_contents($path));}
+  public static function json($path, $array = true) {return json_decode(file_get_contents($path), $array);}
 }

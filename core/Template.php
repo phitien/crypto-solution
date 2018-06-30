@@ -4,12 +4,39 @@ class Template {
   protected $_data;
   protected $_config = [];
   public static function init() {
-    self::$smarty = new Smarty;
-    self::$smarty->setConfigDir('smarty/configs/');
-    self::$smarty->setCompileDir('tmp/compile/');
-    self::$smarty->setCacheDir('tmp/cache/smarty');
-    self::$smarty->debugging = DEBUG;
+    if (!self::$smarty) self::$smarty = self::factory();
   }
+  public static function factory() {
+    $smarty = new Smarty;
+    $smarty->setConfigDir('smarty/configs/');
+    $smarty->setCompileDir('tmp/compile/');
+    $smarty->setCacheDir('tmp/cache/smarty');
+    $smarty->debugging = DEBUG;
+    return $smarty;
+  }
+  public static function renderUC($tpl, $options = []) {
+    $smarty = self::factory();
+    $path = APP_DIR."/views/elements/uc";
+    if (!is_dir($path) || !file_exists("$path/$tpl.tpl")) $path = CORE_DIR."/views/elements/uc";
+    $smarty->setTemplateDir($path);
+    foreach($options as $k => $v) $smarty->assign($k,$v);
+    return $smarty->fetch("$tpl.tpl");
+  }
+  public static function renderMenu($data = []) {
+    $parent_id = isset($data['parent_id']) ? $data['parent_id'] : '';
+    $recursive = isset($data['recursive']) ? $data['recursive'] : false;
+    $class = @$data['class'];
+    $max = (int) $data['max'];
+    $model = new Model_Menu;
+    $item = $model->all(['parent_id' => $parent_id]);
+    return self::renderUC('menu', [
+      'items' => $item,
+      'class' => $class,
+      'recursive' => $recursive,
+      'max' => $max
+    ]);
+  }
+
   public function __construct($data = []) {
     $this->_data = $data;
     $this
@@ -42,8 +69,8 @@ class Template {
         $o = Util::json($p);
         $prop = $info['filename'];
         $klass = "Html_{$prop}";
-        if (is_array($o)) foreach($o as $i) new $klass($i);
-        else new $klass($o);
+        if (is_assoc($o)) new $klass($o);
+        else if (is_array($o)) foreach($o as $i) new $klass($i);
         $config[$prop] = $klass;
       }
     }

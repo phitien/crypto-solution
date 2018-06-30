@@ -1,92 +1,66 @@
-.input {
-  width: 100%;
-  position: relative;
-  .label {
-    font-weight: 500;
-    font-size: 110%;
-    font-style: italic;
+.input-field {
+  $size: 18px;
+  $inner-size: $size - 8px;
+  .text {
+    border: 1px solid #a2a2a2;
+    border-radius: 3px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #383641;
+    padding: 0 8px;
+    &::placeholder {
+      opacity: .5;
+      text-transform: uppercase;
+    }
   }
-  .description {
-    font-size: 85%;
-    font-style: italic;
+  .select {
+    height: 40px;
   }
-  .hint {
-    margin-top: 5px;
-    font-size: 80%;
-    font-style: italic;
+  .checkbox {
+    visibility: hidden;
+    width: $size;height: $size;
   }
-  .error {
-    margin-top: 5px;
-  }
-  .field-wrapper {
-    flex: 1;position: relative;
-    i {
-      cursor: pointer;
+  &.checkbox-field {
+    position: relative;
+    display: flex;justify-content: center;align-items: center;
+    cursor: pointer;
+    &:before {
+      content: '';
+      width: $size;height: $size;
       position: absolute;
-      right: $mapa/4;
-      top: $mapa/6;
-      z-index: 1;
-      color: $black;
+      top: 50%;left: 0;margin-top: -$size/2;
+      display: block;
+      transition: all .5s ease;
+      cursor: pointer;
+      border: 1px solid #a2a2a2;
+      background-color: #fff;
     }
-  }
-  .field {
-    border-bottom: 1px solid $grey;
-    background-color: $white;
-    height: $input-height;
-    width: 100%;
-  }
-  &.invalid {
-    .field {
-      border-bottom: 1px solid $red;
+    label {
+      margin: 0 0 0 4px;
+      padding: 0;
+      cursor: pointer;
     }
-  }
-  &.select {
-    .field {
-      padding-right: $mapa + 10px;
-    }
-    .options {
-      position: absolute;z-index: 2;
-      width: 100%;
-      background-color: $white;
-      color: $black;
-      box-shadow: $shadow;
-      max-height: 200px;
-      overflow: auto;
-      .option {
-        cursor: pointer;
-        padding: 3px;
-        border-bottom: 1px solid $bd-color;
-        &.selected,&:hover {
-          background-color: $lightgrey;
-        }
-      }
-      &:hover {
-        box-shadow: $shadow-hover;
-      }
-    }
-    .field-wrapper {
+    &.checked {
       &:after {
-        content: '';display: block;
-        position: absolute;top: $mapa/2;right: $mapa/2;
-        z-index: 1;
-        border-top: 7px solid black;
-        border-left: 7px solid transparent;
-        border-right: 7px solid transparent;
-        border-bottom: 0 solid transparent;
+        content: '';
+        width: $inner-size;height: $inner-size;
+        position: absolute;
+        top: 50%;left: ($size - $inner-size)/2;margin-top: -$inner-size/2;
+        display: block;
+        transition: all .5s ease;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        background-color: #33333b;
+      }
+
+    }
+    &.radio-field {
+      &:before {
+        border-radius: 50%;
       }
     }
-    &.options-shown {
-      .field-wrapper {
-        &:after {
-          border-top: 0 solid transparent;
-          border-bottom: 7px solid black;
-        }
-      }
-    }
-  }
-  &.password-shown {
-    .field-wrapper i {
-      color: $grey;
+    &.select-field {
     }
   }
 }

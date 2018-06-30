@@ -1,1 +1,1 @@
-right
+<div class="right"></div>

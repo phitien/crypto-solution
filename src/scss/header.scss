@@ -1,37 +1,30 @@
-.top-header {
-  @extend .paddingl,.paddingr;
-  display: flex;justify-content: center;align-items: center;
-  height: 44px;
-  background-color: #33333b;
-  color: #fff;
-  .top-header-link {
-    text-transform: uppercase;
-    margin: 0 12px;
-    cursor: pointer;
-    &:first-child {
-      margin-left: 0;
-    }
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-}
 .header {
-  @extend .paddingl,.paddingr;
-  display: flex;
-  height: $header-height;
+  // height: $header-height;
   border-bottom: 1px solid lightgrey;
   background-color: #f7f7f7;
-  .menu.menu0 {
-    @extend .horizontal,.center,.middle;
-    margin: 0;padding: 0;
-    .node {
-      @extend .horizontal,.center,.middle,.large;
-      margin: 0;padding: 0 $mapa/2;
-      white-space: nowrap;
-      &.active,&:hover {
-        color: $special;
-      }
+  .container {
+    display: flex;align-items: center;
+    margin: auto;padding: 0;
+  }
+  .topbar {
+    height: 40px;width: 100%;
+    background-color: #33333b;color: #fff;
+    display: flex;align-items: center;
+  }
+  .navigation {
+    height: 80px;width: 100%;
+    background-color: #f7f7f7;color: #33333b;
+    display: flex;align-items: center;
+    // font-size: 15px;
+  }
+  .menu {
+    text-transform: uppercase;
+  }
+  .logo {}
+  .searchbox {
+    display: flex;justify-content: center;align-items: center;
+    .input-field {
+      margin: 0 4px;
     }
   }
 }

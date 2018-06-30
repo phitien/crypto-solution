@@ -349,9 +349,9 @@ gulp.task(`deploy`, function(cb) {
   var target = argv('target', 'root@45.117.83.14:/home/admin/domains/purecode.vn/private_html/dashboard')
   console.log(`Target: ${target}`)
   exec(`scp -r ${__dirname}/${config.dest}/* ${target}`, cb)
-  // exec(`scp -r root@45.117.83.14:/home/admin/domains/purecode.vn/private_html/core3/libraries ${__dirname}/share/libraries`)
-  exec(`scp -r ${__dirname}/share/* root@45.117.83.14:/home/admin/domains/purecode.vn/private_html/share`)
-  exec(`scp -r ${__dirname}/api/* root@45.117.83.14:/home/admin/domains/purecode.vn/private_html/sozoapi`)
+  exec(`scp -r ${__dirname}/core/* root@45.117.83.14:/home/admin/domains/purecode.vn/private_html/core`)
+  // exec(`scp -r ${__dirname}/api/* root@45.117.83.14:/home/admin/domains/purecode.vn/private_html/sozoapi`)
+  exec(`scp -r ${__dirname}/mvp/* root@45.117.83.14:/home/admin/domains/purecode.vn/private_html/mvp`)
 })
 gulp.task(`default`, function(cb) {
   buildFn(config, startFn.bind(this, config, watchFn.bind(this, config, cb)))

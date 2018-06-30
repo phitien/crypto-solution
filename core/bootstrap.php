@@ -18,11 +18,14 @@ if (!defined('DOMAIN')) define('DOMAIN', $_SERVER['SERVER_NAME']);
 if (!defined('PROTOCOL')) define('PROTOCOL', ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443 || $_SERVER['HTTP_X_FORWARDED_PORT'] == 443) ? "https://" : "http://");
 if (!defined('EMAIL_VERIFICATION')) define('EMAIL_VERIFICATION', false);
 if (!defined('COUNTRY_PATH')) define('COUNTRY_PATH', CORE_DIR.'/../src/static/static/data/countries.json');
+date_default_timezone_set(TIMEZONE);
 
 function t() {
   $args = func_get_args();
   return call_user_func_array('sprintf', $args);
 }
-date_default_timezone_set(TIMEZONE);
+function is_assoc($o) {
+  return is_array($o) && array_diff_key($o,array_keys(array_keys($o)));
+}
 
 require_once CORE_DIR.'/routes.php';

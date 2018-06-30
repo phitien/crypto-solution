@@ -11,14 +11,16 @@
 </head>
 <body>
 <noscript>{$noscript}</noscript>
-<div id="application1" class="container-fluid application">
-  <div class="container page {$pageClassName}">
-    {$header}
+<div id="application" class="application page {$pageClassName}">
+  <div class="container-fluid header">{$header}</div>
+  <div class="container-fluid body">
     {$left}
-    {$content}
+    <div class="container content">
+      {$content}
+    </div>
     {$right}
-    {$footer}
   </div>
+  <div class="container-fluid footer">{$footer}</div>
 </div>
 {$debug}
 {$bottomscript}

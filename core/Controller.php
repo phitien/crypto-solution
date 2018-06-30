@@ -36,6 +36,12 @@ class Controller {
   public final function pinfo($pinfo = null) {$this->router()->pinfo($pinfo);}
   public final function model() {return $this->_model;}
 
+  public final function template($tpl) {
+    $this->_view->contentTemplate($tpl);return $this;
+  }
+  public final function layout($tpl) {
+    $this->_view->layoutTemplate($tpl);return $this;
+  }
   public final function assignToView($k, $v = null) {$this->_view->assign($k,$v);return $this;}
   public final function hasLeft($v=null) {
     if ($v === null) return $this->_hasLeft;
@@ -56,5 +62,9 @@ class Controller {
     if ($v === null) return $this->_hasFooter;
     $this->assignToView('hasFooter', $this->_hasFooter = $v);
     return $this;
+  }
+
+  public function error() {
+    //do nothing
   }
 }

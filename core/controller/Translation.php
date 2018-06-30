@@ -4,5 +4,4 @@ class Controller_Translation extends Controller {
     parent::__construct($router, $view);
     $this->_model = new Model_Translation;
   }
-  public function all() {return $this->model()->fetch(Request::data());}
 }

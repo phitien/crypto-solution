@@ -1,24 +1,15 @@
 .menu {
-  margin: 0;padding: 0;
-  .node {
+}
+.topmenu {
+  display: flex;
+  margin: 0 0 0 24px;padding: 0;
+  li {
     cursor: pointer;
-  }
-  .name {
-    display: flex;align-items: center;
-    line-height: 24px;
-    .image {
-      display: flex;align-items: center;justify-content: center;
-      margin-right: 4px;
-    }
-    span {
-      display: flex;align-items: center;
-    }
-  }
-  &.top {
-    .name {
-      .image {
-        display: none;
-      }
+    display: block;
+    a {}
+    a span {
+      display: block;
+      padding: 4px 8px;
     }
   }
 }

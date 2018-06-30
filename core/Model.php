@@ -7,7 +7,10 @@ class Model {
 	protected $_data = [];
 	protected $_where = [];
 	protected $_where_extra = [];
-	public final function printme($n, $v) {Log::info($this->klass, $this);return $this;}
+	public final function printme() {
+		Log::info($this->klass, $this);
+		return $this;
+	}
   public final function __set($n, $v) {
 		if ($n == 'output') return;
 		if ($n == 'klass') return;
@@ -47,7 +50,9 @@ class Model {
 	public final function get($f = null) {
 		return $f ? $this->{$f} : empty($this->_data) ? null : $this->_data;
 	}
-	public final function fieldval($k,$v) {return $this->pwdfield($k) ? Util::password($v) : secure($v);}
+	public final function fieldval($k,$v) {
+		return $this->pwdfield($k) ? Util::password($v) : secure($v);
+	}
 	public final function where($data) {
 		$where = array_merge($this->_where, $this->_where_extra);
 		foreach($data as $k => $v) {
@@ -56,7 +61,9 @@ class Model {
 			if (!in_array($k, $this->_fields)) continue;
 			$k = secure($k);
 			$f = strpos($k,'.') === false ? "`{$this->table}`.`$k`" : "`$k`";
-			array_push($where, "$f='{$this->fieldval($k,$v)}'");
+			$v = $this->fieldval($k,$v);
+			if (empty($v)) array_push($where, "$f IS NULL");
+			else array_push($where, "$f='$v'");
 		}
 		return empty($where) ? "" : "WHERE ".implode(' AND ', $where);
 	}
@@ -68,10 +75,10 @@ class Model {
 		$this->_where_extra = [];
 		return $this;
 	}
-	public final function fetch($data) {
+	public final function all($data = []) {
 		return Database::fetch($this->bfullquery($data), $this->klass);
 	}
-	public final function page($data) {
+	public final function page($data = []) {
 		return Database::fetch($this->bquery(), $this->klass, array_merge($data, [
 			'table' => $this->table,
 			'join' => $this->joins(),

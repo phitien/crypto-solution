@@ -1,2 +1,7 @@
 <?php
-Router::add('index');
+Router::add('index', [
+  'controller' => 'Index',
+  'actions' => [
+    'index' => ['public' => false],
+  ]
+]);

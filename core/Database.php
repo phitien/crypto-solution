@@ -12,7 +12,7 @@ class Database {
 			self::$conn = new PDO($dsn, DB_USER, DB_PWD);
 		}
 	}
-	public static function execute($sql) {
+	public static function execute($sql, $values = []) {
 		self::$sql = $sql;
 		$options = Session::get('database.options');
 		if (is_array($options)) {
@@ -24,11 +24,18 @@ class Database {
 			if ($psize) $limit = "LIMIT $page,$psize";
 			self::$sql = self::$sql." $join $where $limit";
 		}
-		Log::sql(self::$sql);
 		$conn = self::$conn;
 		$stmt = $conn->prepare(self::$sql);
-		$stmt->execute();
-		return $stmt;
+		Log::sql(self::$sql);
+		Log::sql($values);
+		try {
+			$stmt->execute(is_array($values) ? $values : [$values]);
+			return $stmt;
+    }
+		catch(PDOExecption $e) {
+			// print_r($e);die;
+			throw new Exception_Database($e->getMessage());
+    }
 	}
 	public static function pinfo() {
 		$options = Session::get('database.options');
@@ -64,15 +71,18 @@ class Database {
 	}
 	public static function fetch($sql, $klass = null, $options = null) {
 		Session::set('database.options', $options);
-		$stmt = self::execute($sql);
+		$params = isset($options) && isset($options['params']) ? $options['params'] : [];
+		$stmt = self::execute($sql, $params);
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
-	public static function one($sql, $klass = null) {
-		$stmt = self::execute($sql);
+	public static function one($sql, $klass = null, $options = null) {
+		$params = isset($options) && isset($options['params']) ? $options['params'] : [];
+		$stmt = self::execute($sql, $params);
 		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
-	public static function value($sql, $klass = null) {
-		$stmt = self::execute($sql);
+	public static function value($sql, $klass = null, $options = null) {
+		$params = isset($options) && isset($options['params']) ? $options['params'] : [];
+		$stmt = self::execute($sql, $params);
 		return $stmt->fetchColumn();
 	}
 }

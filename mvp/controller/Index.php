@@ -1,15 +1,22 @@
 <?php
-class Controller_Index extends Controller {
-  public function __construct(Router $router, View $view) {
-    parent::__construct($router, $view);
-    $this->_model = new Model_Category;
-  }
+class Controller_Index extends Controller_Abstract {
   public function index() {
-    // $this->title = '11111';
-    // $this->hasLeft(false);
-    // $this->hasRight(false);
+    $this->hasLeft(false);
+    $this->hasRight(false);
+    $this->load_marketprices();
+    $this->load_sortby_options();
+    $this->load_countries();
+    $this->load_categories();
+    $this->load_categories_items();
   }
-  public function json() {
-    return $this->model()->fetch(Request::data());
+  public function search() {
+    $this->template('index/index');
+    $this->hasLeft(false);
+    $this->hasRight(false);
+    $this->load_marketprices();
+    $this->load_sortby_options();
+    $this->load_countries();
+    $this->load_categories();
+    $this->load_categories_items();
   }
 }

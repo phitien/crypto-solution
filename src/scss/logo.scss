@@ -8,9 +8,5 @@
   background-size: contain;
   height: $header-height;
   width: 100px;
-  &.small {
-    // @extend .super;
-    // background-position: 6px 50%;
-    // background-size: 12px;
-  }
+  img {display: none;}
 }
